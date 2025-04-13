@@ -23,25 +23,90 @@ body {
 /**************************** Header ********************************/
 /*  */
 .header{
-    background: red;
     padding: 1rem;
-    box-sizing: border-box
-}
+    box-sizing: border-box;
 
+    background: var(--color-2);
+    border-radius: 0 0 30px 30px;
+    padding: 0.5rem;
+}
+/*  */
+.div__contenedor{
+    /* Trabajo de Flex */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/*  */
+.ul__opciones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7rem;
+}
+/*  */
+.ul__opciones li{
+    list-style: none;
+}
+/*  */
+.ul__opciones li a{
+    color: var(--color-3);
+    font-family: "DragonHunter";
+    letter-spacing: 5px;
+    font-size: 1.3rem;
+    text-decoration: none;
+
+    /* Ajustes para animaciones */
+    position: relative;
+    transition: all 0.3s ease;
+}
+/* Efectos visuales */
+.ul__opciones li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-5);
+    transition: width 0.3s ease;
+}
+/*  */
+.ul__opciones li a:hover::after {
+    width: 100%;
+}
+/*  */
+.ul__opciones li a:hover {
+    color: var(--color-5);
+    text-shadow: 0 0 8px var(--color-1);
+    transform: scale(1.05);
+}
 /**************************** Main ********************************/
 /*  */
 .main{
     background: blue;
     padding: 1rem;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 /**************************** Footer ********************************/
 /*  */
 .footer{
-    background: green;
-    padding: 1rem;
-    box-sizing: border-box
+    background: var(--color-4);
+    /* Trabajo de Flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.2rem;
+    box-sizing: border-box;
 }
+.footer p, a{
+    color: var(--color-3);
+    font-family: "Poppins-Medium";
+    font-size: 1rem;
+    text-decoration: none;
+}
+
 
 

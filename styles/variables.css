@@ -1,0 +1,15 @@
+:root{
+    --color-1: #FFFFFF;
+    --color-2: hsla(0, 0%, 100%, 0.200);
+    --color-3: #d9d9d9a2;
+    --color-4: hsla(0, 0%, 100%, 0.350);
+    --color-5: hsla(0, 100%, 50%, 0.880);
+}
+@font-face {
+    font-family: "DragonHunter";
+    src: url(../assets/font/DragonHunter.otf);
+}
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url(../assets/font/Poppins-Medium.ttf);
+}
