@@ -1,0 +1,47 @@
+@import url(variables.css);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+/**************************** Body ********************************/
+/*  */
+body {
+    /* Trabajo de Grid */
+    display: grid; 
+    grid-template-rows: auto 1fr auto; /* Separacion de body en header, main y footer */
+    grid-template-columns: 100%;
+    min-height: 100vh;
+
+    /* Ajusten de imagen de fondo */
+    background-image: url(../assets/img/Fondo.png); /* Imagen de fondo */
+    background-size: cover; /* Para que la imagen cubra toda la pantalla */
+    background-position: center; /* Para centrar la imagen de fondo */
+    background-attachment: fixed; /* Deja la imagen de fondo mientras el contenido se mueve */
+    background-repeat: no-repeat; /* Para que la imagen no se repita */
+}
+/**************************** Header ********************************/
+/*  */
+.header{
+    background: red;
+    padding: 1rem;
+    box-sizing: border-box
+}
+
+/**************************** Main ********************************/
+/*  */
+.main{
+    background: blue;
+    padding: 1rem;
+    box-sizing: border-box
+}
+
+/**************************** Footer ********************************/
+/*  */
+.footer{
+    background: green;
+    padding: 1rem;
+    box-sizing: border-box
+}
+
+
