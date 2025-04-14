@@ -1,5 +1,5 @@
 // Zona de exportacion de Elementos
-import {find, save} from "./api.js";
+import {find, save, login} from "./api.js";
 import {home, inicioSesion, formularioCreacionUsuario} from "./ui.js"
 
 // Zona de pruebas de codigos
@@ -22,7 +22,7 @@ irHome.addEventListener("click", function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
 
     //Modificacion de estilos
-    console.log("Se entro al click de home");
+    console.warn("Se entro al click de home");
     main.style.flexDirection = ``;
     main.style.alignItems = ``;
     main.style.marginTop = ``;
@@ -35,7 +35,7 @@ irHome.addEventListener("click", function(event){
 // Evento Click opcion "Perfil" Menu "Header"
 irPerfil.addEventListener("click", function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
-    console.log("Se entro al click de perfil");
+    console.warn("Se entro al click de perfil");
 
     //Modificacion de estilos
     main.style.gap = ""
@@ -49,11 +49,11 @@ irPerfil.addEventListener("click", function(event){
     main.innerHTML = ``; // Eliminar todo el contenido de el Main
     main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
 });
-// Evento click opcion "Crear Cuenta" Formulario "Inicial Sesion"
+// Evento click opcion "Crear Cuenta" Formulario "Iniciar Sesion"
 document.addEventListener("click", async function(event){
     if(event.target.closest("#crearPerfil")){
         event.preventDefault(); // Quitar todas las acciones por defecto del evento click
-        console.log("Se entro al click de crear Cuenta");
+        console.warn("Se entro al click de crear Cuenta");
     
         //Modificacion de CSS
     
@@ -84,11 +84,55 @@ document.addEventListener("click", async function(event){
 
     }
 });
-// Evento click opcion "Registrar" Formulario "Crear Cuenta"
+// Evento click opcion "Entrar" Formulario "Iniciar Sesion"
+document.addEventListener("click", async function (event) {
+    if(event.target.closest("#botonIniciarsesion")){
+        event.preventDefault();
+        console.warn("Se entro al click de Entrar");
+        // Obtener valores del formulario
+        const usuario = document.getElementById("usuario").value.trim();
+        const contrasena = document.getElementById("contrasena").value.trim();
+
+        console.log("Usuario ingresado:", usuario, typeof(usuario));
+        console.log("Contraseña ingresada:", contrasena, typeof(contrasena));
+
+        //llamamos la funcion de inicio se sesion y capturamos la respuesta
+        const validacionInicio = await login({ usuario, contraseña: contrasena });
+
+        if (validacionInicio) {    
+            alert(`Inicio de sesión usuario: ${usuario} correcto`);       
+            // Guardamos el estado actual de sesion en local storage
+            localStorage.setItem("usuarioActivo", JSON.stringify(validacionInicio));
+            localStorage.setItem("usuario", JSON.stringify(usuario));
+
+            // Limpiar el formulario
+            document.getElementById("usuario").value = "";
+            document.getElementById("contrasena").value = "";
+
+            // Recagamos Main a Home de forma dinamica
+            //Modificacion de estilos
+            console.warn("Se entro al click de home");
+            main.style.flexDirection = ``;
+            main.style.alignItems = ``;
+            main.style.marginTop = ``;
+            main.style.marginBottom = ``;
+            main.style.marginLeft = ``;
+            main.style.gap = ``;
+
+            main.innerHTML = home; // Se agrega el nuevo contenido al main
+
+          } else {
+            console.log(validacionInicio);
+            alert("Usuario y/ó contraseña incorrectas");
+        };
+    };
+});
+// Evento click opcion "Registrar" Formulario "Creacion de Perfil"
 document.addEventListener("click", async function (event) {
     if(event.target.closest("#botonregistrar")){
         event.preventDefault();
-
+        console.warn("Se entro al click de Registrar");
+        
         // Obtener valores del formulario
         const nombre = document.getElementById("nombre").value;
         const correo = document.getElementById("correo").value;
@@ -99,7 +143,7 @@ document.addEventListener("click", async function (event) {
         const nuevoUsuario = {
             id: "",
             nombre: nombre,
-            Correo: correo,
+            correo: correo,
             usuario: usuario,
             contraseña: contrasena,
             personajes: []
@@ -133,11 +177,11 @@ document.addEventListener("click", async function (event) {
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al maineacionUsuario; // Se agrega el nuevo contenido al main
     }
 });
-// Evento click opcion "Iniciar Sesion" Formulario "Crear Cuenta"
+// Evento click opcion "Iniciar Sesion" Formulario "Creacion de Perfil"
 document.addEventListener("click", function(event){
     if(event.target.closest("#iniciarSesion")){
         event.preventDefault(); // Quitar todas las acciones por defecto del evento click
-        console.log("Se entro al click de iniciar Sesion");
+        console.warn("Se entro al click de iniciar Sesion");
         //Modificacion de estilos
         main.style.gap = ""
 

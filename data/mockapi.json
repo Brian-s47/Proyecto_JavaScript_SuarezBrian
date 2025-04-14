@@ -1,0 +1,18 @@
+[
+    {
+      "id": "1",
+      "nombre": "Brian Suarez",
+      "Correo": "briansuarez@gmail.com",
+      "usuario": "Brian1114",
+      "contraseña": "1234",
+      "personajes": []
+    },
+    {
+      "id": "2",
+      "nombre": "Yuliana Gomez",
+      "Correo": "yulianaGomez@gmail.com",
+      "usuario": "yuliana1114",
+      "contraseña": "1234",
+      "personajes": []
+    }
+  ]
