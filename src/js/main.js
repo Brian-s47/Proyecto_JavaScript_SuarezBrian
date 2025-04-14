@@ -1,5 +1,13 @@
 // Zona de exportacion de Elementos
-import {home, inicioSesion} from "./ui.js"
+import {find, save} from "./api.js";
+import {home, inicioSesion, formularioCreacionUsuario} from "./ui.js"
+
+// Zona de pruebas de codigos
+const datosUsuarios = await find();
+console.log(datosUsuarios);
+
+// Zona de variables
+const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 
 // Zona de Selectores
 
@@ -40,6 +48,106 @@ irPerfil.addEventListener("click", function(event){
 
     main.innerHTML = ``; // Eliminar todo el contenido de el Main
     main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
+});
+// Evento click opcion "Crear Cuenta" Formulario "Inicial Sesion"
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#crearPerfil")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.log("Se entro al click de crear Cuenta");
+    
+        //Modificacion de CSS
+    
+        main.style.gap = ""
+    
+        main.style.flexDirection = 'row';
+        main.style.alignItems = `center`;
+        main.style.marginTop = `10%`;
+        main.style.marginBottom = `100%`;
+    
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = formularioCreacionUsuario; // Se agrega el nuevo contenido al main
 
+        // Cargar datos del local storage en formulario
+        campos.forEach(id => {
+            const valorGuardado = localStorage.getItem(id);       
+            if (valorGuardado) {
+                document.getElementById(id).value = valorGuardado;
+            }
+        });
+        // Para guardar los datos en el local storage cada que el usuario los escriba
+        campos.forEach(id => {
+            const input = document.getElementById(id);
+            input.addEventListener('input', () => {
+            localStorage.setItem(id, input.value);
+            });
+        });
 
+    }
+});
+// Evento click opcion "Registrar" Formulario "Crear Cuenta"
+document.addEventListener("click", async function (event) {
+    if(event.target.closest("#botonregistrar")){
+        event.preventDefault();
+
+        // Obtener valores del formulario
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correo").value;
+        const usuario = document.getElementById("usuario").value;
+        const contrasena = document.getElementById("contraseña").value;
+
+            // Crear objeto JS con el contenido base de un usuario
+        const nuevoUsuario = {
+            id: "",
+            nombre: nombre,
+            Correo: correo,
+            usuario: usuario,
+            contraseña: contrasena,
+            personajes: []
+        };
+        // Guardar en la API
+        await save(nuevoUsuario);
+        alert(`El usuario ${nuevoUsuario.usuario} se registro correctamente`)
+
+        // Limpiar localStorage
+        campos.forEach(id => {
+            localStorage.removeItem(id);
+        });
+
+        // Limpiar el formulario
+        campos.forEach(id => {
+            document.getElementById(id).value = "";
+        });
+
+        // Volver a Pagina de Inicio de Sesion
+
+        //Modificacion de estilos
+        main.style.gap = ""
+
+        main.style.flexDirection = 'row';
+        main.style.alignItems = `center`;
+        main.style.marginTop = `17%`;
+        main.style.marginBottom = `50%`;
+        main.style.marginLeft = `35%`;
+
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al maineacionUsuario; // Se agrega el nuevo contenido al main
+    }
+});
+// Evento click opcion "Iniciar Sesion" Formulario "Crear Cuenta"
+document.addEventListener("click", function(event){
+    if(event.target.closest("#iniciarSesion")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.log("Se entro al click de iniciar Sesion");
+        //Modificacion de estilos
+        main.style.gap = ""
+
+        main.style.flexDirection = 'row';
+        main.style.alignItems = `center`;
+        main.style.marginTop = `17%`;
+        main.style.marginBottom = `50%`;
+        main.style.marginLeft = `35%`;
+
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
+    }
 });

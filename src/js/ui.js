@@ -51,3 +51,19 @@ export const inicioSesion = `
   </div>
 </section>
 `;
+// HTML Formulario de Creacion de Usuario
+export const formularioCreacionUsuario = `
+<section class="Section__creacionUSuario">
+  <h2>Creacion de Perfil</h2>
+  <form>
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="email" id="correo" placeholder="correo" required>
+    <input type="text" id="usuario" placeholder="usuario" required>
+    <input type="text" id="contraseña" placeholder="contraseña" required>
+    <button id="botonregistrar" type="submit">Registrar</button>
+  </form>
+  <div class="div__resgistrar">
+    ¿Ya tienes una cuenta? <a id="iniciarSesion" href="#">Iniciar Sesion</a>
+  </div>
+</section>
+`

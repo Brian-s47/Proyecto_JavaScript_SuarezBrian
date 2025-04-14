@@ -279,6 +279,75 @@ body {
     text-shadow: 0 0 8px var(--color-9);
     transform: scale(1.05);
 }
+/*************************** Creacion Perfil *****************************/
+/*  */
+.Section__creacionUSuario {
+    background-color: var(--color-5);
+    box-shadow: 0 0 10px var(--color-1);
+    padding: 3rem;
+    border-radius: 12px;
+    width: 35vw;
+}
+/*  */
+.Section__creacionUSuario h2 {
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 20px;
+    background: var(--color-2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+/*  */
+.Section__creacionUSuario input {
+    font-family: "Poppins-Medium";
+    width: 100%;
+    padding: 10px;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 5px;
+}
+/*  */
+.Section__creacionUSuario button {
+    font-family: "Poppins-Medium";
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-2);
+    border: none;
+    color: var(--color-1);
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*  */
+.div__resgistrar {
+    font-family: "Poppins-Medium";
+    text-align: center;
+    margin-top: 15px;
+}
+/*  */
+.div__resgistrar a {
+    color: var(--color-1);
+    text-decoration: none;
+}
+/* Efectos visuales */
+/*  */
+.Section__creacionUSuario button:hover {
+    color: var(--color-9);
+    text-shadow: 0 0 8px var(--color-9);
+    transform: scale(1.05);
+    border:solid 1px var(--color-9);
+}
+.div__resgistrar a:hover {
+    text-decoration: underline;
+}
+/*  */
+.Section__creacionUSuario a:hover {
+    color: var(--color-9);
+    text-shadow: 0 0 8px var(--color-9);
+    transform: scale(1.05);
+}
 /*************************** Footer *******************************/
 /*  */
 .footer{
