@@ -1,30 +1,5 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/icon/favicon.jpg">  <!-- Icono de Pestaña del navegador -->
-    <link rel="stylesheet" href="../styles/main.css"> <!-- Carga de Archivo de CSS -->
-    <script type="module" defer src="./js/main.js"></script>
-    <title>GameCampus JP D&D</title>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="div__contenedor">
-      <img id="ir__home" src="../assets/icon/iconoD&D.png" alt="iconoD&D">
-      <nav class="nav__menu">
-        <ul class="ul__opciones">
-          <li><a id="ir__Perfil" href="#">Perfil</a></li>
-          <li><a id="ir__masInfo" href="#">Mas Informacion</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  
-<!-- Main -->
-<main class="main">
+// HTML pagina inicial Click en Logo
+export const home = `
   <section class="section__contenidoHome">
     <!-- Contenedor: ¿Qué es esta plataforma?  -->
     <div class="div__info-plataforma">
@@ -61,11 +36,18 @@
       <img src="../assets/img/Personaje-2.png">
     </div>
   </section>
-</main>
-
-<!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 GameCampus - Proyecto JS - <a href="https://dnd.wizards.com/es">Derechos de Juego D&D</a></p>
-    <p>© 2025 Brian Fair Suarez Porras - <a href="https://github.com/Brian-s47">GitHub</a></p>
-  </footer>  
-</body>
+`;
+// HTML inicio de sesion 
+export const inicioSesion = `
+<section class="section__iniciarSesion">
+  <h2>Iniciar Sesión</h2>
+  <form>
+    <input type="text" id="usuario" placeholder="Usuario" required>
+    <input type="password" id="contrasena" placeholder="Contraseña" required>
+    <button id="botonIniciarsesion" type="submit">Entrar</button>
+  </form>
+  <div class="div__resgistrar">
+    ¿No tienes cuenta? <a id="crearPerfil" href="#">Crear cuenta</a>
+  </div>
+</section>
+`;

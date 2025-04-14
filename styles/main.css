@@ -36,6 +36,10 @@ body {
     padding: 0.5rem;
 }
 /*  */
+#ir__home{
+    cursor: pointer;
+}
+/*  */
 .div__contenedor{
     /* Trabajo de Flex */
     display: flex;
@@ -90,11 +94,10 @@ body {
 /*  */
 .main{
     width: 100%;
-    /* background: blue; */
-    /* padding: 1rem; */
 }
+/********* Estilos CSS para pagina inicial "Home" *****************/
 /*  */
-.section__contenido{
+.section__contenidoHome{
     /* Trabajo de Grid */
     display: grid;
     grid-template-columns: repeat(8, 1fr); 
@@ -104,14 +107,14 @@ body {
     align-items: start;
 }
 /*  */
-.section__contenido h2{
+.section__contenidoHome h2{
     font-family: "MedievalSharp-Regular";
     font-size: 1.9rem;
     color: var(--color-1);
     letter-spacing: 1px;
 }
 /*  */
-.section__contenido p{
+.section__contenidoHome p{
     font-family: "CormorantGaramond-Regular";
     font-size:2rem;
 
@@ -124,7 +127,7 @@ body {
     max-height: 20rem; 
 }
 /*  */
-.section__contenido a{
+.section__contenidoHome a{
     font-family: "MedievalSharp-Regular";
     font-size: 2.5rem;
 
@@ -195,7 +198,7 @@ body {
     object-fit: contain;
 }
 /* Efectos visuales */
-.section__contenido p:hover {
+.section__contenidoHome p:hover {
     background-color: var(--color-5); 
     transition: background-color 0.3s ease;
     cursor: default;
@@ -206,6 +209,76 @@ body {
     box-shadow: 0 0 10px var(--color-1);
     cursor: pointer;
   }
+/*************************** Inicio de sesion *****************************/
+/*  */
+.section__iniciarSesion {
+    background-color: var(--color-5);
+    box-shadow: 0 0 10px var(--color-1);
+    padding: 5rem;
+    border-radius: 12px;
+    width: 35vw;
+}
+/*  */
+.section__iniciarSesion h2 {
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    background: var(--color-2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+/*  */
+.section__iniciarSesion input {
+    font-family: "Poppins-Medium";
+    width: 100%;
+    padding: 10px;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 5px;
+}
+/*  */
+.section__iniciarSesion button {
+    font-family: "Poppins-Medium";
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-2);
+    border: none;
+    color: var(--color-1);
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*  */
+.div__resgistrar {
+    font-family: "Poppins-Medium";
+    text-align: center;
+    margin-top: 15px;
+}
+/*  */
+.div__resgistrar a {
+    color: var(--color-1);
+    text-decoration: none;
+}
+/* Efectos visuales */
+/*  */
+.section__iniciarSesion button:hover {
+    color: var(--color-9);
+    text-shadow: 0 0 8px var(--color-9);
+    transform: scale(1.05);
+    border:solid 1px var(--color-9);
+}
+/*  */
+.div__resgistrar a:hover {
+    text-decoration: underline;
+}
+/*  */
+.section__iniciarSesion a:hover {
+    color: var(--color-9);
+    text-shadow: 0 0 8px var(--color-9);
+    transform: scale(1.05);
+}
 /*************************** Footer *******************************/
 /*  */
 .footer{
