@@ -28,7 +28,7 @@ export const home = `
         </p>
       </div>
       <div class="div__boton-creacion">
-        <a href="#">¡Comienza a crear tu héroe!</a>
+        <a id="ir__crearPj" href="#">¡Comienza a crear tu héroe!</a>
       </div>
     </div>
     <!-- Contenedor: Personaje derecha -->
@@ -69,82 +69,125 @@ export const formularioCreacionUsuario = `
 `;
 // HTMML Formulario de creacion de personaje
 export const formularioCreacionPersonaje = `
-<section class="section__crearPersonaje">
-    <h2>Crear Nuevo Personaje</h2>
+<section class="section__contenedorcrearPersonaje">
   
-    <!-- Datos básicos -->
-    <div class="div__nombre">
-      <label for="nombre">Nombre del personaje:</label>
-      <input type="text" id="cp-nombre" placeholder="">
+<!-- Seccion crearPersonaje -->
+  <section class="section__crearPersonaje">
+    <h2 id="titulocrearPersonaje">Crear Nuevo Personaje</h2>
+    <div class="div__contenedorDatospj">
+      <div class="div__contenedorIzquierdo">
+      <!-- Datos básicos -->
+      <div class="div__datosBasicos">
+        <h3>Datos Basicos</h3>
+        <label for="nombre">Nombre del personaje:</label>
+        <input type="text" id="cp-nombre" placeholder="">
+        <label for="genero">Género:</label>
+        <select id="cp-genero">
+          <option value="">Seleccionar</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+  
+      <!-- Datos a eleccion -->
+      <div class="div__raza">
+        <h3>Eleccion de Raza</h3>
+        <label for="raza">Raza:</label>
+        <select id="cp-raza">
+          <option value="">Cargando razas...</option>
+        </select>
+      </div>
+  
+      <div class="div__clase">
+        <h3>Eleccion de Clase</h3>
+        <label for="clase">Clase:</label>
+        <select id="cp-clase">
+          <option value="">Cargando clases...</option>
+        </select>
+      </div>
+  
+      <div class="div__armadura">
+        <h3>Eleccion de Armadura</h3>
+        <label for="armadura">Armadura:</label>
+        <select id="cp-armadura">
+          <option value="">Cargando armaduras...</option>
+        </select>
+      </div>
+  
+      <div class="div__armas">
+        <h3>Eleccion de Arma</h3>
+        <label for="arma">Armas:</label>
+        <select id="cp-arma">
+          <option value="">Cargando armas...</option>
+        </select>
+      </div>
+      </div>
+      <div class="div__contenedorDerecho">
+          <!-- Estadisticas -->
+      <div class="div__estadisticas">
+        <h3>Estadísticas</h3>
+        <label>Fuerza: <input type="number" id="fuerza" min="1" max="20"></label>
+        <label>Destreza: <input type="number" id="destreza" min="1" max="20"></label>
+        <label>Constitución: <input type="number" id="constitucion" min="1" max="20"></label>
+        <label>Inteligencia: <input type="number" id="inteligencia" min="1" max="20"></label>
+        <label>Sabiduría: <input type="number" id="sabiduria" min="1" max="20"></label>
+        <label>Carisma: <input type="number" id="carisma" min="1" max="20"></label>
+      </div>
+  
+      <!-- Datos habilidades -->
+      <div class="div__habilidades">
+        <h3>Eleccion de Habilidades</h3>
+        <label for="habilidades">Habilidades especiales:</label>
+        <select id="habilidades" >
+          <option value="">Cargando habilidades...</option>
+        </select>
+      </div>
+  
+      <!-- Accesorios  -->
+      <div class="div__accesorios">
+        <h3>Eleccion de Accesorios</h3>
+        <label for="accesorios">Accesorios:</label>
+        <input type="text" id="accesorios" placeholder="Ej: Anillo de invisibilidad, Medalla élfica...">
+      </div>
+  
+      <!-- Boton Crear Personaje -->
+      <div class="div__botonCrear">
+        <button id="crearPersonaje">Crear personaje</button>
+      </div>
     </div>
-  
-    <div class="div__genero">
-      <label for="genero">Género:</label>
-      <select id="cp-genero">
-        <option value="">Seleccionar</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Otro</option>
-      </select>
     </div>
-  
-    <!-- Datos a eleccion -->
-    <div class="div__raza">
-      <label for="raza">Raza:</label>
-      <select id="cp-raza">
-        <option value="">Cargando razas...</option>
-      </select>
+    
+  </section>
+  <!-- Seccion descripcion -->
+  <section class="section__descripcion">
+    <h2>Instrucciones de uso de "Creacion de personaje"</h2>
+    <div class="div__descripccion">
+      <h2>¿Qué es esta plataforma?</h2>
+      <p>
+        Esta herramienta te permite construir personajes únicos seleccionando raza, clase, habilidades, equipo, accesorios ¡y mucho más! Todo adaptado al universo de fantasía.
+      </p>
     </div>
-  
-    <div class="div__clase">
-      <label for="clase">Clase:</label>
-      <select id="cp-clase">
-        <option value="">Cargando clases...</option>
-      </select>
+    <div class="div__descripccion">
+      <h2>¿Qué tener en cuenta?</h2>
+      <ol>
+        <li>
+          La aplicacion te estara guiando paso a paso en cada opcion de elijas.
+        </li>
+        <li>
+          La aplicacion estara filtrando cada opcion siguiente a medida que elijas la opcion anterior.
+        </li>
+        <li>
+          Lleva un orden de eleccion de las opciones superiores a las inferiores, no pases a la siguiente opcion sin elejir la anterior.
+        </li>
+        <li>
+          Si deseas ver mas detalles de la opcion que vas a elejir usa el boton "Mas info" al lado del titulo de la casilla que estas llenando.
+        </li>
+      </ol>
     </div>
-  
-    <div class="div__armadura">
-      <label for="armadura">Armadura:</label>
-      <select id="cp-armadura">
-        <option value="">Cargando armaduras...</option>
-      </select>
-    </div>
-  
-    <div class="div__armas">
-      <label for="arma">Armas:</label>
-      <select id="cp-arma">
-        <option value="">Cargando armas...</option>
-      </select>
-    </div>
-  
-    <!-- Estadisticas -->
-    <div class="div__estadisticas">
-      <h3>Estadísticas</h3>
-      <label>Fuerza: <input type="number" id="fuerza" min="1" max="20"></label>
-      <label>Destreza: <input type="number" id="destreza" min="1" max="20"></label>
-      <label>Constitución: <input type="number" id="constitucion" min="1" max="20"></label>
-      <label>Inteligencia: <input type="number" id="inteligencia" min="1" max="20"></label>
-      <label>Sabiduría: <input type="number" id="sabiduria" min="1" max="20"></label>
-      <label>Carisma: <input type="number" id="carisma" min="1" max="20"></label>
-    </div>
-  
-    <!-- Datos habilidades -->
-    <div class="div__habilidades">
-      <label for="habilidades">Habilidades especiales:</label>
-      <select id="habilidades" multiple>
-        <option value="">Cargando habilidades...</option>
-      </select>
-    </div>
-  
-    <!-- Accesorios  -->
-    <div class="div__accesorios">
-      <label for="accesorios">Accesorios:</label>
-      <input type="text" id="accesorios" placeholder="Ej: Anillo de invisibilidad, Medalla élfica...">
-    </div>
-  
-    <!-- Boton Crear Personaje -->
-    <div class="div__botonCrear">
-      <button id="crearPersonaje">Crear personaje</button>
+    <div class="div__imagenCrearPersonaje">
+      <img src="../assets/img/Personajes.webp">
     </div>
   </section>
+</section>
 `;

@@ -1,6 +1,6 @@
 // Zona de exportacion de Elementos
 import {find, save, login} from "./api.js";
-import {home, inicioSesion, formularioCreacionUsuario} from "./ui.js"
+import {home, inicioSesion, formularioCreacionUsuario, formularioCreacionPersonaje} from "./ui.js"
 
 // Zona de pruebas de codigos
 const datosUsuarios = await find();
@@ -14,6 +14,7 @@ const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
+const irCrearPj = document.getElementById("ir__crearPj");
 
 // Zona de eventos de escucha
 
@@ -32,6 +33,25 @@ irHome.addEventListener("click", function(event){
 
     main.innerHTML = home; // Se agrega el nuevo contenido al main
 });
+// Evento de Click "¡Comienza a crear tu héroe!"
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#ir__crearPj")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entro al click de ¡Comienza a crear tu héroe!");
+        
+        //Modificacion de estilos
+        // main.style.gap = ""
+    
+        // main.style.flexDirection = 'row';
+        // main.style.alignItems = `center`;
+        // main.style.marginTop = `17%`;
+        // main.style.marginBottom = `50%`;
+        // main.style.marginLeft = `35%`;
+    
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = formularioCreacionPersonaje; // Se agrega el nuevo contenido al main
+    }
+})
 // Evento Click opcion "Perfil" Menu "Header"
 irPerfil.addEventListener("click", function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
