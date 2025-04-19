@@ -1,11 +1,23 @@
 // ************************  Manejo de Api "dnd5eapi" ***************************
 // Creacion de URL para API-dnd5eapi
-const urldnd5eapi = new URL(`https://www`); //https://www.dnd5eapi.co/api/2014/
+export const urldnd5eapi = new URL(`https://www`); //https://www.dnd5eapi.co/api/2014/
 urldnd5eapi.protocol += `https:`;
 urldnd5eapi.hostname += `.dnd5eapi.co`;
 urldnd5eapi.pathname += `api/2014/`;
 
-
+// Modulo para carga de datos de la API
+export const finddnd5eapi = async(url)=>{
+  const response = await fetch(url.toString(), {method: "get"});
+  return await response.json()  
+};
+// Modulo URL razas:
+export const urlRazas = function(){
+  return new URL("/api/races", "https://www.dnd5eapi.co");
+}
+// Modulo URL razas:
+export const urlRaza = function(raza){
+  return new URL(`/api/races/${raza}`, "https://www.dnd5eapi.co");
+}
 
 // ************************  Manejo de Api "mockapi" ***************************
 // Creacion de URL para API-mockapi
