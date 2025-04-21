@@ -18,6 +18,14 @@ export const urlRazas = function(){
 export const urlRaza = function(raza){
   return new URL(`/api/races/${raza}`, "https://www.dnd5eapi.co");
 }
+// Modulo URL Clases:
+export const urlClases = function(){
+  return new URL(`/api/classes`, "https://www.dnd5eapi.co");
+}
+// Modulo URL Clase:
+export const urlClase = function(clase){
+  return new URL(`/api/classes/${clase}`, "https://www.dnd5eapi.co");
+}
 
 // ************************  Manejo de Api "mockapi" ***************************
 // Creacion de URL para API-mockapi

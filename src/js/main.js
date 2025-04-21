@@ -1,5 +1,5 @@
 // Zona de exportacion de Elementos
-import {find, save, login, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza} from "./api.js";
+import {find, save, login, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza, urlClases, urlClase} from "./api.js";
 import {home, inicioSesion, formularioCreacionUsuario, formularioCreacionPersonaje} from "./ui.js"
 
 // Zona de pruebas de codigos
@@ -17,6 +17,7 @@ const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
+const selectRaza = document.getElementById("#cp-raza")
 
 
 // Zona de eventos de escucha
@@ -54,7 +55,7 @@ document.addEventListener("click", async function(event){
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = formularioCreacionPersonaje; // Se agrega el nuevo contenido al main
     }
-})
+});
 // Evento de despliegue de razas 
 document.addEventListener("click", async function (event) {
     if(event.target.closest("#cp-raza")){
@@ -62,6 +63,7 @@ document.addEventListener("click", async function (event) {
         console.warn("Se entro al click de Ejir raza");
         const selectRaza = document.getElementById("cp-raza");
 
+        selectRaza.innerHTML = `<option value="">Seleccionar raza...</option>`;
         // Traemos los datos de todas las razas
         const urlnueva = urlRazas();  
         const datosRazas = await finddnd5eapi(urlnueva);
@@ -73,61 +75,115 @@ document.addEventListener("click", async function (event) {
             selectRaza.appendChild(option);
         });
     }
-})
+});
 // Evento de seleccion de raza para cambio de descripcion
 document.addEventListener("change", async function(event){
-    console.log(event.target.value);
-    const razaSelec = event.target.value
-    
-    // Traemos los datos de la raza seleccionada
-    const urlnueva = urlRaza(razaSelec);  
-    const datosRaza = await finddnd5eapi(urlnueva);
-    console.log(datosRaza);
+    if (event.target.id === "cp-raza") {
+        const razaSelec = event.target.value;
+        console.log("Raza seleccionada:", razaSelec);
 
-    //Guardamos dato de raza seleccionada en Local storage
-    const nombreRaza = "Raza"
-    localStorage.setItem(nombreRaza, razaSelec);
+        // Traemos los datos de la raza seleccionada
+        const urlnueva = urlRaza(razaSelec);  
+        const datosRaza = await finddnd5eapi(urlnueva);
+        console.log(datosRaza);
 
-    const razaDescripcion = document.querySelector(".section__descripcion");
-    razaDescripcion.innerHTML = ``;  
-    razaDescripcion.innerHTML = `
-        <h2>Descripcion Raza : ${razaSelec}</h2>
-        <div class="div__descripccionRaza">
-            <h2>Alineamiento</h2>
-            <p>
-            ${datosRaza.alignment}
-            </p>
-        </div>
-        <div class="div__descripccionRaza">
-            <h2>Caracteristicas Principales</h2>
-            <ol>
-            <li>
-                Bonus de Estadistica: ${datosRaza.ability_bonuses[0].ability_score.name} + ${datosRaza.ability_bonuses[0].bonus}
-            </li>
-            <ul>
-                Rasgos:
-                <li>${datosRaza.traits[0].name}</li>
-                <li>${datosRaza.traits[1].name}</li>
-                <li>${datosRaza.traits[2].name}</li>
-                <li>${datosRaza.traits[3].name}</li>
-            </ul>
-            <li>
-                Subrazas: ${datosRaza.subraces[0].name}
-            </li>
-            <ul>
-                Competencias Iniciales:
-                <li>${datosRaza.starting_proficiencies[0].name}</li>
-            </ul>
-            <ul>
-                Competencias:
-                <li>${datosRaza.starting_proficiency_options.desc}</li>
-            </ul>
-            </ol>
-        </div>
-        <div class="div__imagenCrearPersonaje">
-            <img src="../assets/img/${razaSelec}.webp">
-        </div>
-    `;  
+        // Guardamos dato de raza seleccionada en Local Storage
+        const nombreRaza = "Raza";
+        localStorage.setItem(nombreRaza, razaSelec);
+
+        // Insertamos descripción en el contenedor derecho
+        const razaDescripcion = document.querySelector(".section__descripcion");
+        razaDescripcion.innerHTML = `
+            <h2>Descripcion Raza : ${razaSelec}</h2>
+            <div class="div__descripccionRaza">
+                <h2>Alineamiento</h2>
+                <p>${datosRaza.alignment}</p>
+            </div>
+            <div class="div__descripccionRaza">
+                <h2>Caracteristicas Principales</h2>
+                <ol>
+                    <li>
+                        Bonus de Estadística: ${datosRaza.ability_bonuses[0].ability_score.name} + ${datosRaza.ability_bonuses[0].bonus}
+                    </li>
+                    <ul>
+                        Rasgos:
+                        ${datosRaza.traits.map(trait => `<li>${trait.name}</li>`).join("")}
+                    </ul>
+                    <li>Subrazas: ${datosRaza.subraces[0]?.name || "Ninguna"}</li>
+                    <ul>
+                        Competencias Iniciales:
+                        ${datosRaza.starting_proficiencies.map(p => `<li>${p.name}</li>`).join("")}
+                    </ul>
+                    ${datosRaza.starting_proficiency_options ? `
+                        <ul>
+                            Competencias:
+                            <li>${datosRaza.starting_proficiency_options.desc}</li>
+                        </ul>
+                    ` : ""}
+                </ol>
+            </div>
+            <div class="div__imagenCrearPersonaje">
+                <img src="../assets/img/${razaSelec}.webp">
+            </div>
+        `;
+    }
+});
+// Evento de despliegue de Clases
+document.addEventListener("click", async function (event) {
+    if(event.target.closest("#cp-clase")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entro al click de Ejir Clases");
+        const selectRaza = document.getElementById("cp-clase");
+
+        selectRaza.innerHTML = `<option value="">Cargando clases...</option>`;
+        // Traemos los datos de todas las Clases
+        const urlnueva = urlClases();  
+        const datosClases = await finddnd5eapi(urlnueva);
+
+        datosClases.results.forEach(clase => {
+            const option = document.createElement("option");
+            option.value = clase.index;
+            option.textContent = clase.name;
+            selectRaza.appendChild(option);
+        });
+    }
+});
+// Evento de seleccion de clase para cambio de descripcion
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-clase") {
+        const claseSelec = event.target.value;
+        console.log("Clase seleccionada:", claseSelec);
+
+        // Traemos los datos de la clase seleccionada
+        const urlnueva = urlClase(claseSelec);  
+        const datosClase = await finddnd5eapi(urlnueva);
+        console.log(datosClase);
+
+        // Guardamos dato de clase seleccionada en Local Storage
+        const nombreClase = "Clase";
+        localStorage.setItem(nombreClase, claseSelec);
+
+        // Insertamos descripción en el contenedor derecho
+        const claseDescripcion = document.querySelector(".section__descripcion");
+        claseDescripcion.innerHTML = `
+            <h2>Descripcion Clase : ${claseSelec}</h2>
+            <div class="div__descripccionClase">
+                <h2>Elecciones Iniciales</h2>
+                <p>${datosClase.proficiency_choices[0].desc}</p>
+            </div>
+            <div class="div__opcionesIniciales">
+                <h2>Opciones Iniciales</h2>
+                <ol>
+                    <li>
+                        Opciones de Armas: ${datosClase.starting_equipment_options[0].desc}}
+                    </li>
+                </ol>
+            </div>
+            <div class="div__imagenSeleccionarClase">
+                <img src="../assets/img/${claseSelec}.png">
+            </div>
+        `;
+    }
 });
 // Evento Click opcion "Perfil" Menu "Header"
 irPerfil.addEventListener("click", function(event){
