@@ -530,7 +530,7 @@ body {
 
 /*************************** Tarjeta Personaje *******************************/
 /*  */
-.div__personaje {
+.div__personaje, .card__personaje {
     max-width: 400px;
     margin: 2rem auto;
     padding: 1.5rem;
@@ -542,13 +542,13 @@ body {
     transition: all 0.3s ease;
   }
   
-  .div__personaje h2 {
+  .div__personaje, .card__personaje h2 {
     margin-bottom: 0.5rem;
     font-size: 1.8rem;
     color: #333;
   }
   
-  .div__personaje img.raza-img {
+  .div__personaje, .card__personaje img.raza-img {
     width: 120px;
     height: auto;
     margin: 1rem 0;
@@ -557,13 +557,13 @@ body {
     border: 2px solid #ccc;
   }
   
-  .div__personaje p {
+  .div__personaje, .card__personaje p {
     margin: 0.3rem 0;
     font-size: 1rem;
     color: #444;
   }
   
-  .div__personaje strong {
+  .div__personaje, .card__personaje strong {
     color: #222;
   }
   

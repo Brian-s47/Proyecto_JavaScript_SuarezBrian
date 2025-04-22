@@ -17,6 +17,7 @@ const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
+const ulOpciones = document.querySelector(".ul__opciones");
 const selectRaza = document.getElementById("#cp-raza");
 
 // Zona de modulos funcionales
@@ -45,6 +46,17 @@ function limpiarOpciones(selectElement) {
 // Funcion para lanzar dado de 6 caras
 function lanzarDado() {
     return Math.floor(Math.random() * 6) + 1;
+}
+// Funcion validar usuario activo
+function validarUsuarioActivo(){
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuario")); // este tiene toda la info del usuario
+    if (usuarioActivo) {
+        console.warn(`Usuario Activo:${usuarioActivo} `);
+        return true
+    }else{
+        console.warn(`No se tiene usuario activo`);
+        return false
+    }
 }
 
 // Zona de eventos de escucha
@@ -875,13 +887,15 @@ document.addEventListener("click", async function (event) {
         });
 
         // Actualizar en localStorage
-        localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActualizado));
 
         alert("¡Personaje guardado con éxito!");
         // Limpiar todo el localStorage excepto "usuario"
-        const usuarioData = localStorage.getItem("usuario"); // Guardamos temporalmente
+        const usuarioData = localStorage.getItem("usuarioActivo"); // Guardamos temporalmente
+        const usuario = localStorage.getItem("usuario"); // Guardamos temporalmente
         localStorage.clear(); // Borramos todo
-        localStorage.setItem("usuario", usuarioData); // Restauramos solo el usuario
+        localStorage.setItem("usuarioActivo", usuarioData); // Restauramos datos de sesion
+        localStorage.setItem("usuario", usuario); // Restauramos datos de sesion
             //Modificacion de estilos
             main.style.flexDirection = ``;
             main.style.alignItems = ``;
@@ -916,21 +930,83 @@ document.addEventListener("click", async function (event) {
 });
 // **************************** Eventos de Perfil ***************************//
 // Evento Click opcion "Perfil" Menu "Header"
-irPerfil.addEventListener("click", function(event){
+irPerfil.addEventListener("click", async function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
     console.warn("Se entro al click de perfil");
 
-    //Modificacion de estilos
-    main.style.gap = ""
+    if(validarUsuarioActivo()){
+        const usuarioActivo = localStorage.getItem("usuario"); // ← "Brian1114" por ejemplo
 
-    main.style.flexDirection = 'row';
-    main.style.alignItems = `center`;
-    main.style.marginTop = `17%`;
-    main.style.marginBottom = `50%`;
-    main.style.marginLeft = `35%`;
+        // Buscar al usuario completo desde la API
+        const usuarios = await find();
+        console.log(usuarios, typeof(usuarios));
+        
+        // Limpiamos y preparamos el <main>
+        main.innerHTML = "";
+        main.className = "perfil__container"; // Añadimos clase para css
 
-    main.innerHTML = ``; // Eliminar todo el contenido de el Main
-    main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
+        // Si tiene personajes, los mostramos
+        usuarios.forEach(usuario =>{
+            console.log(usuarioActivo, JSON.stringify(usuario.usuario)); 
+            if(JSON.stringify(usuario.usuario) === usuarioActivo && usuario.personajes.length > 0) {
+                console.log(usuario.personajes, usuario.personajes.length);  
+                usuario.personajes.forEach(personaje => {
+                    const tarjeta = document.createElement("div");
+                    tarjeta.classList.add("card__personaje");
+                    tarjeta.innerHTML = `
+                        <h2>${personaje.nombrePj}</h2>
+                        <img src="../assets/img/${personaje.Raza.toLowerCase()}.webp" alt="${personaje.Raza}" class="raza-img"/>
+                        <p><strong>Género:</strong> ${personaje.Genero}</p>
+                        <p><strong>Raza:</strong> ${personaje.Raza}</p>
+                        <p><strong>Clase:</strong> ${personaje.Clase}</p>
+                        <p><strong>Armadura:</strong> ${personaje.tipoArmor} - ${personaje.Armadura}</p>
+                        <p><strong>Arma:</strong> ${personaje.tipoArma} - ${personaje.Arma}</p>
+                        <p><strong>Accesorio:</strong> ${personaje.tipoAccesorio} - ${personaje.Accesorio}</p>
+                        <p><strong>Habilidad:</strong> ${personaje.Habilidad}</p>
+    
+                        <div class="estadisticas">
+                          <h3>Estadísticas</h3>
+                          <ul>
+                            <li>Fuerza: ${personaje.Estadisticas.fuerza}</li>
+                            <li>Destreza: ${personaje.Estadisticas.destreza}</li>
+                            <li>Constitución: ${personaje.Estadisticas.constitucion}</li>
+                            <li>Inteligencia: ${personaje.Estadisticas.inteligencia}</li>
+                            <li>Sabiduría: ${personaje.Estadisticas.sabiduria}</li>
+                            <li>Carisma: ${personaje.Estadisticas.carisma}</li>
+                          </ul>
+                        </div>
+                    `;
+                    main.appendChild(tarjeta);
+                    //Modificacion de estilos
+                    main.style.gap = ""
+                    main.style.display = 'flex';
+                    main.style.alignItems = `center`;
+                    main.style.justifyContent = `center`;
+                });    
+            }else {
+                // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;
+            }       
+        });
+        // Creacion de opcion superior menu para cerrar sesion
+        const nuevoLi = document.createElement("li");
+        const nuevoEnlace = document.createElement("a");
+        nuevoEnlace.id = "cerrarSesion";
+        nuevoEnlace.textContent = "Cerrar Sesion"; // Puedes cambiar este texto
+        nuevoLi.appendChild(nuevoEnlace);
+        ulOpciones.appendChild(nuevoLi); 
+    }else{
+        //Modificacion de estilos
+        main.style.gap = ""
+
+        main.style.flexDirection = 'row';
+        main.style.alignItems = `center`;
+        main.style.marginTop = `17%`;
+        main.style.marginBottom = `50%`;
+        main.style.marginLeft = `35%`;
+
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
+    }
 });
 // Evento click opcion "Crear Cuenta" Formulario "Iniciar Sesion"
 document.addEventListener("click", async function(event){
@@ -965,6 +1041,28 @@ document.addEventListener("click", async function(event){
             });
         });
 
+    }
+});
+// Evento Click opcion "Cerrar Sesion"
+document.addEventListener("click", function(event){
+    event.preventDefault();
+    if(event.target.closest("#cerrarSesion")){
+        localStorage.clear(); // Borramos todo
+        //Modificacion de estilos
+        console.warn("Se entro al click de home");
+        main.style.flexDirection = ``;
+        main.style.alignItems = ``;
+        main.style.marginTop = ``;
+        main.style.marginBottom = ``;
+        main.style.marginLeft = ``;
+        main.style.gap = ``;
+
+        main.innerHTML = home; // Se agrega el nuevo contenido al main
+        // Eliminar el elemento "Cerrar Sesion" de la lista
+        const cerrarSesionLi = document.querySelector("#cerrarSesion").closest("li"); // Encuentra el <li> que contiene el enlace
+        if (cerrarSesionLi) {
+            cerrarSesionLi.remove(); // Elimina el <li> del DOM
+        }
     }
 });
 // Evento click opcion "Entrar" Formulario "Iniciar Sesion"
