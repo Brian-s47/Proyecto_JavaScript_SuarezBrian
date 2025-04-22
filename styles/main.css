@@ -15,7 +15,6 @@ body {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     overflow-x: hidden; /* habilitar scroll horizontal unicamente*/
-    /* min-height: 100vh; */
 
     /* Ajusten de imagen de fondo */
     background-image: url(../assets/img/Fondo.png); /* Imagen de fondo */
@@ -32,7 +31,8 @@ body {
     position: sticky;
     top: 0;
 
-    background: var(--color-2);
+    background: var(--color-4);
+    backdrop-filter: blur(7px);
     border-radius: 0 0 30px 30px;
     padding: 0.5rem;
 }
@@ -67,7 +67,7 @@ body {
 }
 /*  */
 .ul__opciones li a{
-    color: var(--color-3);
+    color: var(--color-9);
     font-family: "DragonHunter";
     letter-spacing: 5px;
     font-size: 1rem;
@@ -130,7 +130,7 @@ body {
 /*  */
 .section__contenidoHome p{
     font-family: "CormorantGaramond-Regular";
-    font-size: 1.25rem;
+    font-size: 1.7rem;
     line-height: 1.6;
 
     color: var(--color-1);
@@ -170,31 +170,24 @@ body {
 .div__personaje-izquierda{
     grid-column: 1 / 3;
     grid-row: 2 / 3;
-    /* background: yellow; */
     height: auto;
-    /* min-height: 150px; */
 }
 /*  */
 .div__info-aplicacion{
     grid-column: 3 / 7;
     grid-row: 2 / 3;
-    /* background: green; */
-    /* Trabajo de Flex */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5rem;
 
     height: auto;
-    /* min-height: 150px; */
 }
 /*  */
 .div__personaje-derecha{
     grid-column: 7 / 9;
     grid-row: 2 / 4;
-    /* background: red; */
     height: auto;
-    /* min-height: 150px; */
 }
 /*  */
 .div__personaje-izquierda img{
@@ -249,7 +242,7 @@ body {
     box-shadow: 0 0 10px var(--color-1);
     padding: 5rem;
     border-radius: 12px;
-    width: 35vw;
+    width: 35rem;
 }
 /*  */
 .section__iniciarSesion h2 {
@@ -319,7 +312,7 @@ body {
     box-shadow: 0 0 10px var(--color-1);
     padding: 3rem;
     border-radius: 12px;
-    width: 35vw;
+    width: 35rem;
 }
 /*  */
 .Section__creacionUSuario h2 {
@@ -480,6 +473,7 @@ body {
 .div__contenedorDerecho input{
     font-family: "Poppins-Medium";
     font-size: 1rem;
+    text-align: center;
 }
 /*  */
 .div__contEstats{
@@ -553,7 +547,7 @@ body {
 }
 /*  */
 .div__imagenCrearPersonaje img{
-    width: 200px;
+    width: 460px;
     height: auto;
 }
 /*  */
@@ -564,15 +558,16 @@ body {
     text-align: center;
 }
 /*  */
+.section__descripcion ul{
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
+    font-size: 1.4rem;
+}
+/*  */
 .section__descripcion p, li{
     font-family: "CormorantGaramond-Regular";
     font-size: 1.4rem;
     color: var(--color-1);
-}
-/*  */
-.section__descripcion img{
-    height: 88%;
-    object-fit: contain;
 }
 /*  */
 .div__botonCrear{
@@ -580,51 +575,165 @@ body {
     align-items: center;
     justify-content: center;
 }
+/*************************** Descripcion Raza *******************************/
+/*  */
+.div__imagenPersonaje img{
+    width: 160px;
+    height: auto;
+}
+/*  */
+.div__descripccionRaza{
+    display: flex;
+    flex-direction: column;
+}
+/*  */
+.div__descripccionRaza ul{
+    display: flex;
+    flex-direction: column;
+}
 /*************************** Lanzamiento de dados *******************************/
 /*  */
-
+.div_lanzamientoDados {
+    background-color: var(--color-9);
+    color: var(--color-3);
+    border: 2px solid var(--color-3);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 12px var(--color-1);
+}
+/*  */
+.div_lanzamientoDados h4 {
+    font-family: "MedievalSharp-Regular";
+    color: var(--color-1);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+/*  */
+.resultados-dados ul {
+    font-family: "CormorantGaramond-Regular";
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    max-height: 235px;
+    overflow-y: auto;
+    border: 1px solid var(--color-3);
+    border-radius: 0.5rem;
+    background-color: var(--color-5);
+}
+/*  */
+.resultados-dados li {
+    font-family:"CormorantGaramond-Regular";
+    padding: 0.2rem 2rem;
+    border-bottom: 1px solid var(--color-3);
+    font-size: 1.8rem;
+}
+/*  */
+.resultados-dados li:last-child {
+    border-bottom: none;
+}
+/*  */
+.div_lanzamientoDados button {
+    background: var(--color-8);
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
+    font-size: 1.4rem;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1rem auto;
+    display: block;
+}
+/*  */
+.div_lanzamientoDados button:disabled {
+    background-color: var(--color-1);
+    color: var(--color-3);
+    cursor: not-allowed;
+}
+/*  */
+.asignador-estadisticas {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+}
+/*  */
+.asignador-estadisticas p {
+    font-family: "CormorantGaramond-Regular";
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-1);
+}
+/*  */
+.asignador-estadisticas select {
+    font-family: "CormorantGaramond-Regular";
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-3);
+    background-color: var(--color-10);
+    color: var(--color-1);
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+}
+/*  */
+.asignador-estadisticas button {
+    margin-top: 1rem;
+}
 /*************************** Tarjeta Personaje *******************************/
 /*  */
 .div__personaje, .card__personaje {
     max-width: 400px;
+    height: auto;
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    background-color: #f5f5f5;
-    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--color-8);
     text-align: center;
     transition: all 0.3s ease;
 }
 /*  */
-    .div__personaje, .card__personaje h2 {
+.div__personaje, .card__personaje h2 {
+    font-family:"MedievalSharp-Regular";
     margin-bottom: 0.5rem;
     font-size: 1.8rem;
-    color: #333;
+    color: var(--color-1);
 }
 /*  */
-.div__personaje, .card__personaje img.raza-img {
-    width: 120px;
+.div__personaje, .card__personaje{
     height: auto;
     margin: 1rem 0;
     border-radius: 6px;
     object-fit: cover;
-    border: 2px solid #ccc;
+    border: 2px solid var(--color-1);
+}
+/*  */
+.raza-img {
+    max-width: 200px;
+    height: auto;
 }
 /*  */
 .div__personaje, .card__personaje p {
+    font-family: "CormorantGaramond-Regular";
     margin: 0.3rem 0;
     font-size: 1rem;
-    color: #444;
+    color: var(--color-1);
 }
 /*  */
 .div__personaje, .card__personaje strong {
-    color: #222;
+    color: var(--color-1);
 }
 /*  */
 .estadisticas {
     margin-top: 1.2rem;
-    background-color: #e9e9e9;
+    background-color: var(--color-9);
     padding: 0.8rem;
     border-radius: 8px;
 }
@@ -632,7 +741,7 @@ body {
 .estadisticas h3 {
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
-    color: #444;
+    color: var(--color-1);
 }
 /*  */
 .estadisticas ul {
@@ -644,7 +753,7 @@ margin: 0;
 .estadisticas li {
     padding: 0.2rem 0;
     font-size: 0.95rem;
-    color: #555;
+    color: var(--color-1);
 }
 /*  */
 .card__footer {
@@ -652,18 +761,19 @@ margin: 0;
 }
 /*  */
 .card__footer button {
-    padding: 0.6rem 1.2rem;
+    background: var(--color-8);
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
     font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #3e8ed0;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    padding: 0.4rem;
+    border-radius: 12px;
 }
 /*  */
 .card__footer button:hover {
-    background-color: #3276b1;
+    color: var(--color-9);
+    text-shadow: 0 0 8px var(--color-9);
+    transform: scale(1.05);
+    border:solid 1px var(--color-9);
 }
 /*************************** Mostrar Persoanjes *******************************/
 /*  */
@@ -679,20 +789,20 @@ margin: 0;
 .footer{
     width: 100%;
     background: var(--color-4);
+    backdrop-filter: blur(7px);
     position: fixed;
     left: 0;
     bottom: 0;
     font-size: 0.9rem;
+
     /* Trabajo de Flex */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* flex-direction: column; */
 
     padding: 0.3rem;
     height: auto;
     text-align: center;
-    /* margin-top: 3rem; */
 }
 /*  */
 .footer p, a{

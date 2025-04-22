@@ -8,6 +8,7 @@
     --color-7: hsla(0, 100%, 81%, 0.300);
     --color-8: hsla(0, 100%, 50%, 0.300);
     --color-9: #000000;
+    --color-10: hsl(0, 100%, 30%);
 }
 @font-face {
     font-family: "DragonHunter";

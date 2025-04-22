@@ -18,7 +18,6 @@ const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
 const irmasInfo = document.getElementById("ir__masInfo")
 const ulOpciones = document.querySelector(".ul__opciones");
-const selectRaza = document.getElementById("#cp-raza");
 
 // Zona de modulos funcionales
 
@@ -87,6 +86,61 @@ document.addEventListener("click", async function(event){
         main.innerHTML = formularioCreacionPersonaje; // Se agrega el nuevo contenido al main
     }
 });
+// Evento click opcion "Mostrar Personajes"
+irmasInfo.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    // Buscar al usuario completo desde la API
+    const usuarios = await find();
+    console.log(usuarios, typeof(usuarios));
+
+    // Limpiamos y preparamos el <main>
+    const sectionPerfilContainer = document.createElement("section");
+    sectionPerfilContainer.className = "perfil__container"; // Añadimos clase para css
+    main.innerHTML = "";
+    main.appendChild(sectionPerfilContainer);
+    
+    // Recorrido de todos los usuarios
+    usuarios.forEach(usuario =>{
+        console.log(JSON.stringify(usuario.usuario)); 
+        if(usuario.personajes.length > 0) {
+            console.log(usuario.personajes, usuario.personajes.length);  
+            usuario.personajes.forEach(personaje => {
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add("card__personaje");
+                tarjeta.innerHTML = `
+                    <h2>${personaje.nombrePj}</h2>
+                    <img src="../assets/img/${personaje.Raza.toLowerCase()}.webp" alt="${personaje.Raza}" class="raza-img"/>
+                    <p><strong>Género:</strong> ${personaje.Genero}</p>
+                    <p><strong>Raza:</strong> ${personaje.Raza}</p>
+                    <p><strong>Clase:</strong> ${personaje.Clase}</p>
+                    <p><strong>Armadura:</strong> ${personaje.tipoArmor} - ${personaje.Armadura}</p>
+                    <p><strong>Arma:</strong> ${personaje.tipoArma} - ${personaje.Arma}</p>
+                    <p><strong>Accesorio:</strong> ${personaje.tipoAccesorio} - ${personaje.Accesorio}</p>
+                    <p><strong>Habilidad:</strong> ${personaje.Habilidad}</p>
+
+                    <div class="estadisticas">
+                        <h3>Estadísticas</h3>
+                        <ul>
+                        <li>Fuerza: ${personaje.Estadisticas.fuerza}</li>
+                        <li>Destreza: ${personaje.Estadisticas.destreza}</li>
+                        <li>Constitución: ${personaje.Estadisticas.constitucion}</li>
+                        <li>Inteligencia: ${personaje.Estadisticas.inteligencia}</li>
+                        <li>Sabiduría: ${personaje.Estadisticas.sabiduria}</li>
+                        <li>Carisma: ${personaje.Estadisticas.carisma}</li>
+                        </ul>
+                    </div>
+                `;
+                sectionPerfilContainer.appendChild(tarjeta);
+                // Modificacion de estylos main
+                main.style.marginTop = "";
+                main.style.marginLeft = "";
+            });    
+        }else {
+            // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;
+        }       
+    });
+});
 // **************************** Eventos de Creacion de pj ***************************//
 // Evento para guardar el nombre del personaje en localStorage
 document.addEventListener("input", function(event){
@@ -147,7 +201,7 @@ document.addEventListener("change", async function(event){
         // Insertamos descripción en el contenedor derecho
         const razaDescripcion = document.querySelector(".section__descripcion");
         razaDescripcion.innerHTML = `
-        <div class="div__imagenCrearPersonaje">
+            <div class="div__imagenPersonaje">
                 <img src="../assets/img/${razaSelec}.webp">
             </div>
             <h2>Descripcion Raza : ${razaSelec}</h2>
@@ -162,8 +216,6 @@ document.addEventListener("change", async function(event){
                         Bonus de Estadística: ${datosRaza.ability_bonuses[0].ability_score.name} + ${datosRaza.ability_bonuses[0].bonus}
                     </li>
                     <ul>
-                        Rasgos:
-                        ${datosRaza.traits.map(trait => `<li>${trait.name}</li>`).join("")}
                         Competencias Iniciales:
                         ${datosRaza.starting_proficiencies.map(p => `<li>${p.name}</li>`).join("")}
                     </ul>
@@ -938,9 +990,12 @@ irPerfil.addEventListener("click", async function(event){
         const usuarios = await find();
         console.log(usuarios, typeof(usuarios));
         
+
         // Limpiamos y preparamos el <main>
+        const sectionPerfilContainer = document.createElement("section");
+        sectionPerfilContainer.className = "perfil__container"; // Añadimos clase para css
         main.innerHTML = "";
-        main.className = "perfil__container"; // Añadimos clase para css
+        main.appendChild(sectionPerfilContainer);
 
         // Si tiene personajes, los mostramos
         usuarios.forEach(usuario =>{
@@ -956,9 +1011,9 @@ irPerfil.addEventListener("click", async function(event){
                         <p><strong>Género:</strong> ${personaje.Genero}</p>
                         <p><strong>Raza:</strong> ${personaje.Raza}</p>
                         <p><strong>Clase:</strong> ${personaje.Clase}</p>
-                        <p><strong>Armadura:</strong> ${personaje.tipoArmor} - ${personaje.Armadura}</p>
-                        <p><strong>Arma:</strong> ${personaje.tipoArma} - ${personaje.Arma}</p>
-                        <p><strong>Accesorio:</strong> ${personaje.tipoAccesorio} - ${personaje.Accesorio}</p>
+                        <p><strong>Armadura:</strong> ${personaje.Armadura}</p>
+                        <p><strong>Arma:</strong> ${personaje.Arma}</p>
+                        <p><strong>Accesorio:</strong> ${personaje.Accesorio}</p>
                         <p><strong>Habilidad:</strong> ${personaje.Habilidad}</p>
     
                         <div class="estadisticas">
@@ -973,33 +1028,25 @@ irPerfil.addEventListener("click", async function(event){
                           </ul>
                         </div>
                     `;
-                    main.appendChild(tarjeta);
-                    //Modificacion de estilos
-                    main.style.gap = ""
-                    main.style.display = 'flex';
-                    main.style.alignItems = `center`;
-                    main.style.justifyContent = `center`;
+                    sectionPerfilContainer.appendChild(tarjeta);
                 });    
             }else {
                 // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;
             }       
         });
-        // Creacion de opcion superior menu para cerrar sesion
-        const nuevoLi = document.createElement("li");
-        const nuevoEnlace = document.createElement("a");
-        nuevoEnlace.id = "cerrarSesion";
-        nuevoEnlace.textContent = "Cerrar Sesion"; // Puedes cambiar este texto
-        nuevoLi.appendChild(nuevoEnlace);
-        ulOpciones.appendChild(nuevoLi); 
+            // Creacion de opcion de cerrar sesion 
+            if (!document.getElementById("cerrarSesion")) {
+                const nuevoLi = document.createElement("li");
+                const nuevoEnlace = document.createElement("a");
+                nuevoEnlace.id = "cerrarSesion";
+                nuevoEnlace.textContent = "Cerrar Sesion";
+                nuevoLi.appendChild(nuevoEnlace);
+                ulOpciones.appendChild(nuevoLi);
+            }
     }else{
         //Modificacion de estilos
-        main.style.gap = ""
-
-        main.style.flexDirection = 'row';
-        main.style.alignItems = `center`;
-        main.style.marginTop = `2%`;
-        main.style.marginBottom = `0`;
-        main.style.marginLeft = `30%`;
+        main.style.marginTop = `15%`;
+        // main.style.marginLeft = `20%`;
 
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
@@ -1011,15 +1058,8 @@ document.addEventListener("click", async function(event){
         event.preventDefault(); // Quitar todas las acciones por defecto del evento click
         console.warn("Se entro al click de crear Cuenta");
     
-        //Modificacion de CSS
-    
-        main.style.gap = ""
-    
-        main.style.flexDirection = 'row';
-        main.style.alignItems = `center`;
-        main.style.marginTop = `2%`;
-        main.style.marginBottom = `0`;
-        main.style.marginLeft = `30%`;
+        //Modificacion de estilos
+        // main.style.marginTop = `15%`;
     
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = formularioCreacionUsuario; // Se agrega el nuevo contenido al main
@@ -1089,14 +1129,8 @@ document.addEventListener("click", async function (event) {
             document.getElementById("contrasena").value = "";
 
             // Recagamos Main a Home de forma dinamica
-            //Modificacion de estilos
-            console.warn("Se entro al click de home");
-            main.style.flexDirection = ``;
-            main.style.alignItems = ``;
+            // Modificacion de estilos
             main.style.marginTop = ``;
-            main.style.marginBottom = ``;
-            main.style.marginLeft = ``;
-            main.style.gap = ``;
 
             main.innerHTML = home; // Se agrega el nuevo contenido al main
 
@@ -1143,15 +1177,6 @@ document.addEventListener("click", async function (event) {
 
         // Volver a Pagina de Inicio de Sesion
 
-        //Modificacion de estilos
-        main.style.gap = ""
-
-        main.style.flexDirection = 'row';
-        main.style.alignItems = `center`;
-        main.style.marginTop = `17%`;
-        main.style.marginBottom = `50%`;
-        main.style.marginLeft = `35%`;
-
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al maineacionUsuario; // Se agrega el nuevo contenido al main
     }
@@ -1165,67 +1190,9 @@ document.addEventListener("click", function(event){
         main.style.gap = ""
 
         //Modificacion de estilos
-        main.style.gap = ""
-
-        main.style.flexDirection = 'row';
-        main.style.alignItems = `center`;
-        main.style.marginTop = `2%`;
-        main.style.marginBottom = `0`;
-        main.style.marginLeft = `30%`;
+        // main.style.marginTop = `15%`;
 
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
     }
-});
-// Evento click opcion "Mostrar Personajes"
-irmasInfo.addEventListener("click", async function (event) {
-    event.preventDefault();
-
-    // Buscar al usuario completo desde la API
-    const usuarios = await find();
-    console.log(usuarios, typeof(usuarios));
-
-    // Limpiamos y preparamos el <main>
-    main.innerHTML = "";
-    main.className = "perfil__container"; // Añadimos clase para css
-
-    // REcorrido de todos los usuarios
-    usuarios.forEach(usuario =>{
-        console.log(JSON.stringify(usuario.usuario)); 
-        if(usuario.personajes.length > 0) {
-            console.log(usuario.personajes, usuario.personajes.length);  
-            usuario.personajes.forEach(personaje => {
-                const tarjeta = document.createElement("div");
-                tarjeta.classList.add("card__personaje");
-                tarjeta.innerHTML = `
-                    <h2>${personaje.nombrePj}</h2>
-                    <img src="../assets/img/${personaje.Raza.toLowerCase()}.webp" alt="${personaje.Raza}" class="raza-img"/>
-                    <p><strong>Género:</strong> ${personaje.Genero}</p>
-                    <p><strong>Raza:</strong> ${personaje.Raza}</p>
-                    <p><strong>Clase:</strong> ${personaje.Clase}</p>
-                    <p><strong>Armadura:</strong> ${personaje.tipoArmor} - ${personaje.Armadura}</p>
-                    <p><strong>Arma:</strong> ${personaje.tipoArma} - ${personaje.Arma}</p>
-                    <p><strong>Accesorio:</strong> ${personaje.tipoAccesorio} - ${personaje.Accesorio}</p>
-                    <p><strong>Habilidad:</strong> ${personaje.Habilidad}</p>
-
-                    <div class="estadisticas">
-                        <h3>Estadísticas</h3>
-                        <ul>
-                        <li>Fuerza: ${personaje.Estadisticas.fuerza}</li>
-                        <li>Destreza: ${personaje.Estadisticas.destreza}</li>
-                        <li>Constitución: ${personaje.Estadisticas.constitucion}</li>
-                        <li>Inteligencia: ${personaje.Estadisticas.inteligencia}</li>
-                        <li>Sabiduría: ${personaje.Estadisticas.sabiduria}</li>
-                        <li>Carisma: ${personaje.Estadisticas.carisma}</li>
-                        </ul>
-                    </div>
-                `;
-                main.appendChild(tarjeta);
-                // Modificacion de estylos main
-                main.style.marginLeft = "";
-            });    
-        }else {
-            // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;
-        }       
-    });
 });
