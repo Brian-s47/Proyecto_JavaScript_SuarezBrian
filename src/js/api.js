@@ -26,6 +26,22 @@ export const urlClases = function(){
 export const urlClase = function(clase){
   return new URL(`/api/classes/${clase}`, "https://www.dnd5eapi.co");
 }
+// Modulo URL tipo de armadura:
+export const urlArmaduras = function(tipoArmor){
+  return new URL(`/api/equipment-categories/${tipoArmor}`, "https://www.dnd5eapi.co");
+}
+// Modulo URL tipo de arma:
+export const urlArma = function(tipoArma){
+  return new URL(`/api/equipment-categories/${tipoArma}`, "https://www.dnd5eapi.co");
+}
+// Modulo URL habilidad:
+export const urlHabilidad = function(habilidad){
+  return new URL(`/api/skills/${habilidad}`, "https://www.dnd5eapi.co");
+}
+// Modulo URL Tipo de Accesorios:
+export const urlTipoAccesorios = function(tipoAccesorio){
+  return new URL(`/api/equipment-categories/${tipoAccesorio}`, "https://www.dnd5eapi.co");
+}
 
 // ************************  Manejo de Api "mockapi" ***************************
 // Creacion de URL para API-mockapi

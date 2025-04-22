@@ -108,6 +108,11 @@ export const formularioCreacionPersonaje = `
       </div>
   
       <div class="div__armadura">
+        <h3>Eleccion Tipo Armadura</h3>
+        <label for="tipo_Armadura">Armadura:</label>
+        <select id="cp-tipoArmadura">
+          <option value="">Cargando tipo de armaduras...</option>
+        </select>
         <h3>Eleccion de Armadura</h3>
         <label for="armadura">Armadura:</label>
         <select id="cp-armadura">
@@ -117,6 +122,10 @@ export const formularioCreacionPersonaje = `
   
       <div class="div__armas">
         <h3>Eleccion de Arma</h3>
+        <label for="arma">Tipos de Armas:</label>
+        <select id="cp-tipoArma">
+          <option value="">Cargando tipo de armas...</option>
+        </select>
         <label for="arma">Armas:</label>
         <select id="cp-arma">
           <option value="">Cargando armas...</option>
@@ -125,15 +134,16 @@ export const formularioCreacionPersonaje = `
       </div>
       <div class="div__contenedorDerecho">
           <!-- Estadisticas -->
-      <div class="div__estadisticas">
-        <h3>Estadísticas</h3>
-        <label>Fuerza: <input type="number" id="fuerza" min="1" max="20"></label>
-        <label>Destreza: <input type="number" id="destreza" min="1" max="20"></label>
-        <label>Constitución: <input type="number" id="constitucion" min="1" max="20"></label>
-        <label>Inteligencia: <input type="number" id="inteligencia" min="1" max="20"></label>
-        <label>Sabiduría: <input type="number" id="sabiduria" min="1" max="20"></label>
-        <label>Carisma: <input type="number" id="carisma" min="1" max="20"></label>
-      </div>
+          <div class="div__estadisticas">
+            <h3>Estadísticas</h3>
+            <button id="lanzarDados">Lanzar Dados!</button>
+            <label>Fuerza: <input type="number" id="fuerza" min="1" max="20"></label>
+            <label>Destreza: <input type="number" id="destreza" min="1" max="20"></label>
+            <label>Constitución: <input type="number" id="constitucion" min="1" max="20"></label>
+            <label>Inteligencia: <input type="number" id="inteligencia" min="1" max="20"></label>
+            <label>Sabiduría: <input type="number" id="sabiduria" min="1" max="20"></label>
+            <label>Carisma: <input type="number" id="carisma" min="1" max="20"></label>
+          </div>
   
       <!-- Datos habilidades -->
       <div class="div__habilidades">
@@ -146,9 +156,18 @@ export const formularioCreacionPersonaje = `
   
       <!-- Accesorios  -->
       <div class="div__accesorios">
-        <h3>Eleccion de Accesorios</h3>
+        <h3>Eleccion de Accesorio</h3>
+        <label for="accesorios">Tipo de Accesorios:</label>
+        <select id="tipoAccesorios" >
+          <option value="potion">potion</option>
+          <option value="ring">ring</option>
+          <option value="kits">kits</option>
+          <option value="holy-symbols">holy-symbols</option>
+        </select>
         <label for="accesorios">Accesorios:</label>
-        <input type="text" id="accesorios" placeholder="Ej: Anillo de invisibilidad, Medalla élfica...">
+        <select id="accesorios" >
+          <option value="">Cargando accesorios...</option>
+        </select>
       </div>
   
       <!-- Boton Crear Personaje -->

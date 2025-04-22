@@ -1,5 +1,5 @@
 // Zona de exportacion de Elementos
-import {find, save, login, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza, urlClases, urlClase} from "./api.js";
+import {find, save, login, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza, urlClases, urlClase, urlArmaduras, urlArma, urlHabilidad, urlTipoAccesorios} from "./api.js";
 import {home, inicioSesion, formularioCreacionUsuario, formularioCreacionPersonaje} from "./ui.js"
 
 // Zona de pruebas de codigos
@@ -17,11 +17,35 @@ const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
-const selectRaza = document.getElementById("#cp-raza")
+const selectRaza = document.getElementById("#cp-raza");
 
+// Zona de modulos funcionales
+
+// Borrar opciones de menu
+function limpiarOpciones(selectElement) {
+    const valorSeleccionado = selectElement.value;
+
+    // Guardar solo la opción seleccionada
+    const opcionSeleccionada = [...selectElement.options].find(opt => opt.value === valorSeleccionado);
+
+    // Limpiar todas las opciones
+    selectElement.innerHTML = "";
+
+    // Si había una seleccionada, volver a agregarla al principio
+    if (opcionSeleccionada) {
+        selectElement.appendChild(opcionSeleccionada);
+    } else {
+        // Si no había selección previa, poner opción por defecto
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Selecciona una opción...";
+        selectElement.appendChild(defaultOption);
+    }
+}
 
 // Zona de eventos de escucha
 
+// **************************** Eventos de Menu principal ***************************//
 // Evento Click logo D&D "Header"
 irHome.addEventListener("click", function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
@@ -43,17 +67,29 @@ document.addEventListener("click", async function(event){
         event.preventDefault(); // Quitar todas las acciones por defecto del evento click
         console.warn("Se entro al click de ¡Comienza a crear tu héroe!");
         
-        //Modificacion de estilos
-        // main.style.gap = ""
-    
-        // main.style.flexDirection = 'row';
-        // main.style.alignItems = `center`;
-        // main.style.marginTop = `17%`;
-        // main.style.marginBottom = `50%`;
-        // main.style.marginLeft = `35%`;
-    
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = formularioCreacionPersonaje; // Se agrega el nuevo contenido al main
+    }
+});
+
+// **************************** Eventos de Creacion de pj ***************************//
+// Evento para guardar el nombre del personaje en localStorage
+document.addEventListener("input", function(event){
+    if (event.target.id === "cp-nombre") {
+        const nombre = event.target.value;
+        localStorage.setItem("nombrePj", nombre);
+        console.log("Nombre guardado:", nombre);
+    }
+});
+// Evento de seleccion de Genero para guardar en Local Storage
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-genero") {
+        const generoSelec = event.target.value;
+        console.log("Genero:", generoSelec);
+
+        // Guardamos dato del Genero seleccionado en Local Storage
+        const genero = "Genero";
+        localStorage.setItem(genero, generoSelec);
     }
 });
 // Evento de despliegue de razas 
@@ -63,7 +99,9 @@ document.addEventListener("click", async function (event) {
         console.warn("Se entro al click de Ejir raza");
         const selectRaza = document.getElementById("cp-raza");
 
-        selectRaza.innerHTML = `<option value="">Seleccionar raza...</option>`;
+        // Para limpiar menu y que no se acumule con cada click
+        limpiarOpciones(selectRaza);
+        
         // Traemos los datos de todas las razas
         const urlnueva = urlRazas();  
         const datosRazas = await finddnd5eapi(urlnueva);
@@ -135,11 +173,15 @@ document.addEventListener("click", async function (event) {
         console.warn("Se entro al click de Ejir Clases");
         const selectRaza = document.getElementById("cp-clase");
 
-        selectRaza.innerHTML = `<option value="">Cargando clases...</option>`;
-        // Traemos los datos de todas las Clases
-        const urlnueva = urlClases();  
-        const datosClases = await finddnd5eapi(urlnueva);
+        // Para limpiar menu y que no se acumule con cada click
+        limpiarOpciones(selectRaza);
 
+        // Traemos los datos de todas las Clases
+        const urlnueva = urlClases(); 
+        console.log(urlnueva); // Validar URL         
+        const datosClases = await finddnd5eapi(urlnueva);
+        console.log(datosClases);
+        
         datosClases.results.forEach(clase => {
             const option = document.createElement("option");
             option.value = clase.index;
@@ -185,6 +227,365 @@ document.addEventListener("change", async function(event){
         `;
     }
 });
+// Evento de Seleccion de tipo de armadura
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#cp-tipoArmadura")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entró al click de elegir Tipo de Armadura");
+        const selectTipoArmadura = document.getElementById("cp-tipoArmadura");
+
+        // Para limpiar menu y que no se acumule con cada click
+        limpiarOpciones(selectTipoArmadura);
+
+        // Traer la clase seleccionada actual
+        const claseSelec = localStorage.getItem("Clase");
+
+        try {
+            // Traer datos de la clase seleccionada
+            const urlnueva = urlClase(claseSelec);  
+            const datosClase = await finddnd5eapi(urlnueva);
+
+            let armaduras = [];
+
+            // Condiciones especiales
+            if (claseSelec === "monk") {
+                armaduras = [{
+                    index: "medium-armor",
+                    name: "Medium Armor"
+                }];
+            } else if (claseSelec === "sorcerer" || claseSelec === "wizard") {
+                armaduras = [{
+                    index: "light-armor",
+                    name: "Light Armor"
+                }];
+            } else {
+                // Filtrar proficiencies que contienen "armor"
+                armaduras = datosClase.proficiencies.filter(p => p.index.includes("armor"));
+            }
+            // Limpiar y agregar opciones válidas
+            armaduras.forEach(armadura => {
+                const option = document.createElement("option");
+                option.value = armadura.index;
+                option.textContent = armadura.name;
+                selectTipoArmadura.appendChild(option);
+            });
+
+        } catch (error) {
+            console.error("Error obteniendo datos de clase:", error);
+            selectTipoArmadura.innerHTML = `<option value="">Error cargando armaduras</option>`;
+        }
+    }
+});
+// Evento de seleccion de tipo de armadura para guardar dato seleccionado
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-tipoArmadura") {
+        const tipoArmorSelec = event.target.value;
+        console.log("Tipo de Armadura seleccionada:", tipoArmorSelec);
+
+        // Condicional para seleccion de "all-armor"
+        if(tipoArmorSelec === "all-armor"){
+            // Guardamos dato de clase seleccionada en Local Storage
+            const tipoArmor = "tipoArmor";
+            localStorage.setItem(tipoArmor, "armor");
+        }else{
+            // Guardamos dato de clase seleccionada en Local Storage
+            const tipoArmor = "tipoArmor";
+            localStorage.setItem(tipoArmor, tipoArmorSelec);
+        }
+    }
+});
+// Evento de Seleccion de armadura
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#cp-armadura")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entró al click de elegir Armadura");
+
+        const selectTipoArmadura = document.getElementById("cp-armadura");
+
+        // Para limpiar menu y que no se acomule con cada click
+        limpiarOpciones(selectTipoArmadura);
+
+        // Traer el tipo de clase seleccionada actual
+        const tipoArmor = localStorage.getItem("tipoArmor");
+
+        try {
+            // Traemos todas las Armaduras segun eleccion
+            const urlnueva = urlArmaduras(tipoArmor);  
+            const datosArmaduras = await finddnd5eapi(urlnueva);
+            console.log("URL usada:", urlnueva);
+            console.log("Datos recibidos:", datosArmaduras);
+
+            // Acceder a datosArmaduras.equipment, no a results
+            if (datosArmaduras && Array.isArray(datosArmaduras.equipment)) {
+                datosArmaduras.equipment.forEach(armadura => {
+                    const option = document.createElement("option");
+                    option.value = armadura.index;
+                    option.textContent = armadura.name;
+                    selectTipoArmadura.appendChild(option);
+                });
+            } else {
+                console.error("No se encontraron armaduras válidas");
+                selectTipoArmadura.innerHTML = `<option value="">No se encontraron armaduras</option>`;
+            }
+        } catch (error) {
+            console.error("Error obteniendo armaduras:", error);
+            selectTipoArmadura.innerHTML = `<option value="">Error cargando armaduras</option>`;
+        }
+    }
+});
+// Evento de Seleccion de tipo de arma
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#cp-tipoArma")) {
+        event.preventDefault();
+        console.warn("Se entró al click de elegir Tipo de Arma");
+
+        const selectTipoArma = document.getElementById("cp-tipoArma");
+
+        // Limpiar menú antes de cargar nuevas opciones
+        limpiarOpciones(selectTipoArma);
+
+        // Obtener la clase seleccionada del localStorage
+        const claseSelec = localStorage.getItem("Clase");
+
+        try {
+            const urlnueva = urlClase(claseSelec);  
+            const datosClase = await finddnd5eapi(urlnueva);
+
+            // Filtramos condiciones Especiales
+            if(claseSelec === "bard"){
+                const option = document.createElement("option");
+                option.value = "musical-instruments";
+                option.textContent = "Musical Instruments";
+                selectTipoArma.appendChild(option);
+            }else if (claseSelec === "druid" || claseSelec === "sorcerer" || claseSelec === "wizard")
+                {
+                    // Filtrar proficiencies que son armas (sin armor ni saving)
+                    const armas = datosClase.proficiencies.filter(p => 
+                        !p.index.includes("armor") &&
+                        !p.index.includes("saving") &&
+                        !p.index.includes("weapon")
+                    );
+
+                    // Agregar las armas como opciones
+                    armas.forEach(arma => {
+                        const option = document.createElement("option");
+                        option.value = arma.index;
+                        option.textContent = arma.name;
+                        selectTipoArma.appendChild(option);
+                    });
+                }else {
+                    // Filtrar proficiencies que son armas (sin armor ni saving)
+                    const armas = datosClase.proficiencies.filter(p => 
+                        !p.index.includes("armor") &&
+                        !p.index.includes("saving") &&
+                        p.index.includes("weapon")
+                    );
+
+                    // Agregar las armas como opciones
+                    armas.forEach(arma => {
+                        const option = document.createElement("option");
+                        option.value = arma.index;
+                        option.textContent = arma.name;
+                        selectTipoArma.appendChild(option);
+                    });
+                }
+        } catch (error) {
+            console.error("Error obteniendo datos de clase para armas:", error);
+            selectTipoArma.innerHTML = `<option value="">Error cargando armas</option>`;
+        }
+    }
+});
+// Evento de seleccion de tipo de Arma para guardar dato seleccionado
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-tipoArma") {
+        const tipoArmaSelec = event.target.value;
+        console.log("Tipo de Arma seleccionada:", tipoArmaSelec);
+
+        // Guardamos dato de el tipo de arma seleccionada en Local Storage
+        const tipoArma = "tipoArma";
+        localStorage.setItem(tipoArma, tipoArmaSelec);
+    }
+});
+// Evento de Seleccion de Arma
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#cp-arma")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entró al click de elegir Arma");
+
+        const selectTipoArma = document.getElementById("cp-arma");
+
+        // Para limpiar menu y que no se acomule con cada click
+        limpiarOpciones(selectTipoArma);
+
+        // Traer el tipo de Arma seleccionada actual
+        const tipoArma = localStorage.getItem("tipoArma");
+        const claseSelec = localStorage.getItem("Clase");
+
+        if (claseSelec === "druid" || claseSelec === "sorcerer" || claseSelec === "wizard")
+            {
+                const option = document.createElement("option");
+                option.value = "none";
+                option.textContent = "None";
+                selectTipoArma.appendChild(option);
+            }else{
+                try {
+                    // Traemos todas las Armaduras segun eleccion
+                    const urlnueva = urlArma(tipoArma);  
+                    const datosArmas = await finddnd5eapi(urlnueva);
+                    console.log("URL usada:", urlnueva);
+                    console.log("Datos recibidos:", datosArmas);
+        
+                    // Acceder a datosArmaduras.equipment, no a results
+                    if (datosArmas && Array.isArray(datosArmas.equipment)) {
+                        datosArmas.equipment.forEach(arma => {
+                            const option = document.createElement("option");
+                            option.value = arma.index;
+                            option.textContent = arma.name;
+                            selectTipoArma.appendChild(option);
+                        });
+                    } else {
+                        console.error("No se encontraron armaduras válidas");
+                        selectTipoArma.innerHTML = `<option value="">No se encontraron armaduras</option>`;
+                    }
+                } catch (error) {
+                    console.error("Error obteniendo armaduras:", error);
+                    selectTipoArma.innerHTML = `<option value="">Error cargando armaduras</option>`;
+                }
+            }
+    }
+});
+// Evento de eleccion de habilidades
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#habilidades")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        console.warn("Se entró al click de elegir Tipo de Habilidad");
+        const selectHabilidad = document.getElementById("habilidades");
+
+        // Para limpiar menu y que no se acumule con cada click
+        limpiarOpciones(selectHabilidad);
+
+        // Traer la clase seleccionada actual
+        const claseSelec = localStorage.getItem("Clase");
+
+        try {
+            const urlnueva = urlClase(claseSelec);  
+            const datosClase = await finddnd5eapi(urlnueva);
+            // Validar que existan opciones de proficiencia
+            if (!datosClase.proficiency_choices || datosClase.proficiency_choices.length === 0) {
+                console.warn("Esta clase no tiene opciones de habilidades para elegir.");
+                selectHabilidad.innerHTML = `<option value="">No hay habilidades disponibles</option>`;
+                return;
+            }
+            // Extraer habilidades desde proficiency_choices[0].from.options
+            const opciones = datosClase.proficiency_choices[0]?.from?.options || [];
+            // Renderizar cada habilidad
+            opciones.forEach(opcion => {
+                const item = opcion.item;
+                const option = document.createElement("option");
+                option.value = item.index;
+                option.textContent = item.name;
+                selectHabilidad.appendChild(option);
+            });
+            // Cambiamos de forma dinamica para mostras datos de esta habilidad
+        } catch (error) {
+            console.error("Error cargando habilidades:", error);
+            selectHabilidad.innerHTML = `<option value="">Error cargando habilidades</option>`;
+        }
+    }
+});
+// Evento de seleccion de habilidad para cambio de descripcion
+document.addEventListener("change", async function(event){
+    if (event.target.id === "habilidades") {
+        const habilidadSelec = event.target.value;
+        const habilidadSelecLimpia = habilidadSelec.replace("skill-", "")
+        console.log("Habiliadad seleccionada:", habilidadSelecLimpia);
+
+        // Traemos los datos de la habilidad seleccionada
+        const urlnueva = urlHabilidad(habilidadSelecLimpia);  
+        const datosHabilidad = await finddnd5eapi(urlnueva);
+        console.log(datosHabilidad);
+
+        // Guardamos dato de Habilidad seleccionada en Local Storage
+        const nombreHabilidad = "Habilidad";
+        localStorage.setItem(nombreHabilidad, habilidadSelecLimpia);
+
+        // Insertamos descripción en el contenedor derecho
+        const habilidadDescripcion = document.querySelector(".section__descripcion");
+        habilidadDescripcion.innerHTML = `
+            <h2>Descripcion Habiliadad : ${habilidadSelecLimpia}</h2>
+            <div class="div__descripccionHabilidad">
+                <h2>Descripcion</h2>
+                <p>${datosHabilidad.desc}</p>
+                <h2>Estadistica Clave</h2>
+                <p>${datosHabilidad.ability_score.name}</p>
+            </div>
+        `;
+    }
+});
+// Evento de seleccion de tipo de accesorio para cambio de descripcion
+document.addEventListener("change", async function(event){
+    if (event.target.id === "tipoAccesorios") {
+        const tipoAccesorioSelec = event.target.value;
+        console.log("Tipo de Accesorio:", tipoAccesorioSelec);
+
+        // Guardamos dato del tipo de accesorio seleccionado en Local Storage
+        const tipoAccesorio = "tipoAccesorio";
+        localStorage.setItem(tipoAccesorio, tipoAccesorioSelec);
+    }
+});
+// Evento de Selección de Accesorio (cuando se da clic al <select>)
+document.addEventListener("click", async function(event){
+    if(event.target.closest("#accesorios")){
+        event.preventDefault(); 
+        console.warn("Se entró al click de elegir Accesorio");
+
+        const selectAccesorios = document.getElementById("accesorios");
+
+        // Limpiar opciones previas
+        limpiarOpciones(selectAccesorios);
+
+        // Obtener tipo de accesorio guardado en Local Storage
+        const tipoAccesorio = localStorage.getItem("tipoAccesorio");
+
+        if (!tipoAccesorio) {
+            console.warn("No hay tipo de accesorio seleccionado.");
+            return;
+        }
+
+        // Construir la URL y obtener datos
+        const urlnueva = urlTipoAccesorios(tipoAccesorio);  
+        const datosAccesorios = await finddnd5eapi(urlnueva);
+
+        console.log("URL usada:", urlnueva);
+        console.log("Datos recibidos:", datosAccesorios);
+
+        // Validar estructura de datos
+        if (datosAccesorios && Array.isArray(datosAccesorios.equipment)) {
+            datosAccesorios.equipment.forEach(accesorio => {
+                const option = document.createElement("option");
+                option.value = accesorio.index;
+                option.textContent = accesorio.name;
+                selectAccesorios.appendChild(option);
+            });
+        } else {
+            console.error("No se encontraron accesorios válidos.");
+            selectAccesorios.innerHTML = `<option value="">No hay accesorios disponibles</option>`;
+        }
+    }
+});
+// Evento de seleccion de Accesorio para guardar en Local Storage
+document.addEventListener("change", async function(event){
+    if (event.target.id === "accesorios") {
+        const accesorioSelec = event.target.value;
+        console.log("Accesorio:", accesorioSelec);
+
+        // Guardamos dato del Accesorio seleccionado en Local Storage
+        const Accesorio = "Accesorio";
+        localStorage.setItem(Accesorio, accesorioSelec);
+    }
+});
+
+// **************************** Eventos de Perfil ***************************//
 // Evento Click opcion "Perfil" Menu "Header"
 irPerfil.addEventListener("click", function(event){
     event.preventDefault(); // Quitar todas las acciones por defecto del evento click
