@@ -45,7 +45,7 @@ export const urlTipoAccesorios = function(tipoAccesorio){
 
 // ************************  Manejo de Api "mockapi" ***************************
 // Creacion de URL para API-mockapi
-const keymockapi = `67fbc54b1f8b41c81684d0fa`;
+const keymockapi = `68066bd2e81df7060eb717e4`;
 const urlmockapi = new URL(`https://${keymockapi}`); //https://67fbc54b1f8b41c81684d0fa.mockapi.io/usuarios/users
 urlmockapi.protocol += `https:`;
 urlmockapi.hostname += `.mockapi.io`;
@@ -87,4 +87,25 @@ export const login = async ({ usuario, contraseña }) => {
       console.error("Error en la validación de inicio de sesión:", error);
       return null;
     }
+};
+// Modulo para guardar personaje de usuario usuario
+export const update = async (id, datosActualizados) => {
+  const urlUpdate = new URL(`https://${keymockapi}.mockapi.io/usuarios/users/${id}`);
+  const opciones = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(datosActualizados),
+  };
+  try {
+    const response = await fetch(urlUpdate.toString(), opciones);
+    if (!response.ok) {
+      throw new Error("Error al actualizar el usuario");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al hacer PUT a usuario:", error);
+    throw error;
+  }
 };

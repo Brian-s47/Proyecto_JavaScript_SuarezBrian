@@ -67,7 +67,7 @@ export const formularioCreacionUsuario = `
   </div>
 </section>
 `;
-// HTMML Formulario de creacion de personaje
+// HTML Formulario de creacion de personaje
 export const formularioCreacionPersonaje = `
 <section class="section__contenedorcrearPersonaje">
   
@@ -132,6 +132,7 @@ export const formularioCreacionPersonaje = `
         </select>
       </div>
       </div>
+
       <div class="div__contenedorDerecho">
           <!-- Estadisticas -->
           <div class="div__estadisticas">
@@ -159,6 +160,7 @@ export const formularioCreacionPersonaje = `
         <h3>Eleccion de Accesorio</h3>
         <label for="accesorios">Tipo de Accesorios:</label>
         <select id="tipoAccesorios" >
+          <option value="">Tipos Accesorios...</option>
           <option value="potion">potion</option>
           <option value="ring">ring</option>
           <option value="kits">kits</option>
@@ -209,4 +211,8 @@ export const formularioCreacionPersonaje = `
     </div>
   </section>
 </section>
+`;
+// HTML Tarjeta de Personaje
+export const targetaPersonaje = `
+  
 `;

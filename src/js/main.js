@@ -1,5 +1,5 @@
 // Zona de exportacion de Elementos
-import {find, save, login, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza, urlClases, urlClase, urlArmaduras, urlArma, urlHabilidad, urlTipoAccesorios} from "./api.js";
+import {find, save, login, update, finddnd5eapi, urldnd5eapi, urlRazas, urlRaza, urlClases, urlClase, urlArmaduras, urlArma, urlHabilidad, urlTipoAccesorios} from "./api.js";
 import {home, inicioSesion, formularioCreacionUsuario, formularioCreacionPersonaje} from "./ui.js"
 
 // Zona de pruebas de codigos
@@ -41,6 +41,10 @@ function limpiarOpciones(selectElement) {
         defaultOption.textContent = "Selecciona una opción...";
         selectElement.appendChild(defaultOption);
     }
+}
+// Funcion para lanzar dado de 6 caras
+function lanzarDado() {
+    return Math.floor(Math.random() * 6) + 1;
 }
 
 // Zona de eventos de escucha
@@ -333,6 +337,17 @@ document.addEventListener("click", async function(event){
         }
     }
 });
+// Evento de seleccion de Armadura para guardar dato seleccionado
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-armadura") {
+        const armaduraSelec = event.target.value;
+        console.log("Tipo de Arma seleccionada:", armaduraSelec);
+
+        // Guardamos dato de el tipo de armadura seleccionada en Local Storage
+        const armadura = "Armadura";
+        localStorage.setItem(armadura, armaduraSelec);
+    }
+});
 // Evento de Seleccion de tipo de arma
 document.addEventListener("click", async function(event){
     if(event.target.closest("#cp-tipoArma")) {
@@ -452,6 +467,17 @@ document.addEventListener("click", async function(event){
                     selectTipoArma.innerHTML = `<option value="">Error cargando armaduras</option>`;
                 }
             }
+    }
+});
+// Evento de seleccion de Arma para guardar dato seleccionado
+document.addEventListener("change", async function(event){
+    if (event.target.id === "cp-arma") {
+        const armaSelec = event.target.value;
+        console.log("Tipo de Arma seleccionada:", armaSelec);
+
+        // Guardamos dato de el tipo de arma seleccionada en Local Storage
+        const arma = "Arma";
+        localStorage.setItem(arma, armaSelec);
     }
 });
 // Evento de eleccion de habilidades
@@ -584,7 +610,310 @@ document.addEventListener("change", async function(event){
         localStorage.setItem(Accesorio, accesorioSelec);
     }
 });
+// Evento de click en el botón "Lanzar Dados"
+document.addEventListener("click", function(event){
+    if (event.target && event.target.id === "lanzarDados"){
 
+        // Seleccionamos la sección donde mostraremos los lanzamientos y limpiamos cualquier contenido anterior
+        const descripcionSection = document.querySelector(".section__descripcion");
+        descripcionSection.innerHTML = ""; 
+
+        // Creamos un contenedor donde irá toda la interfaz del lanzamiento de dados
+        const contenedor = document.createElement("div");
+        contenedor.classList.add("div_lanzamientoDados");
+
+        // Variables de control
+        let lanzamientosRestantes = 6;  // Número máximo de lanzamientos
+        const resultadosDados = [];     // Array donde se guardan las sumas de cada tirada
+        let statsAsignadas = 0;         // Cuántas estadísticas ya se han asignado
+        const statsUsadas = new Set();  // Conjunto para evitar asignar dos veces a la misma estadística
+
+        // Título que muestra cuántos lanzamientos quedan
+        const titulo = document.createElement("h4");
+        titulo.textContent = `Quedan ${lanzamientosRestantes} lanzamientos`;
+
+        // Contenedor para mostrar los resultados de cada tirada
+        const resultados = document.createElement("div");
+        resultados.classList.add("resultados-dados");
+        resultados.innerHTML = `<ul id="listaResultados"></ul>`;
+
+        // Botón para lanzar los dados
+        const botonLanzar = document.createElement("button");
+        botonLanzar.textContent = "Lanzar Dados";
+
+        // Lógica al hacer click en el boton "Lanzar Dados"
+        botonLanzar.addEventListener("click", () => {
+            if (lanzamientosRestantes > 0) {
+                // Lanzamos tres dados de 6 caras
+                const d1 = lanzarDado();
+                const d2 = lanzarDado();
+                const d3 = lanzarDado();
+                const suma = d1 + d2 + d3;
+
+                // Guardamos la suma en el array
+                resultadosDados.push(suma);
+                lanzamientosRestantes--;
+                titulo.textContent = `Quedan ${lanzamientosRestantes} lanzamientos`;
+
+                // Mostramos esta tirada en pantalla
+                const li = document.createElement("li");
+                li.textContent = `Lanzamiento ${resultadosDados.length}: ${d1} + ${d2} + ${d3} = ${suma}`;
+                document.getElementById("listaResultados").appendChild(li);
+
+                // Cuando se terminan los lanzamientos, se bloquea el botón y se muestra el asignador
+                if (lanzamientosRestantes === 0) {
+                    botonLanzar.disabled = true;
+                    crearAsignador(); // Función que muestra la interfaz para asignar valores
+                }
+            }
+        });
+
+        // Función que crea el sistema de asignacion de valores a estadisticas
+        function crearAsignador() {
+            const asignador = document.createElement("div");
+            asignador.classList.add("asignador-estadisticas");
+
+            const instrucciones = document.createElement("p");
+            instrucciones.textContent = "Ahora asigna cada valor a una estadística:";
+
+            // Lista para elegir una suma lanzada
+            const selectValor = document.createElement("select");
+            selectValor.id = "selectValor";
+            selectValor.innerHTML = `<option value="">Seleccionar Valor</option>` + 
+                resultadosDados.map((val, i) => `<option value="${val}">${val}</option>`).join("");
+
+            // Lista para elegir una estadística
+            const selectStat = document.createElement("select");
+            selectStat.id = "selectStat";
+            const stats = ["fuerza", "destreza", "constitucion", "inteligencia", "sabiduria", "carisma"];
+            selectStat.innerHTML = `<option value="">Asignar a...</option>` + 
+                stats.map(stat => `<option value="${stat}">${stat.charAt(0).toUpperCase() + stat.slice(1)}</option>`).join("");
+
+            // Boton para confirmar la asignación del valor a la estadistica
+            const botonAsignar = document.createElement("button");
+            botonAsignar.textContent = "Asignar Valor";
+
+            // Logica de asignación
+            botonAsignar.addEventListener("click", () => {
+                const valor = parseInt(selectValor.value);
+                const stat = selectStat.value;
+
+                // Guardamos La estadistica y el valor en local storage
+                localStorage.setItem(stat, valor);
+
+                // Validación: que se haya seleccionado valor y estadística no repetida
+                if (!valor || !stat || statsUsadas.has(stat)) {
+                    alert("Selecciona un valor válido y una estadística no usada.");
+                    return;
+                }
+
+                // Asignamos el valor al input de la estadística seleccionada
+                document.getElementById(stat).value = valor;
+
+                // Guardamos que ya usamos esa estadística
+                statsUsadas.add(stat);
+
+                // Eliminamos el valor y la estadística del menú para no repetir
+                selectValor.querySelector(`option[value="${valor}"]`).remove();
+                selectStat.querySelector(`option[value="${stat}"]`).remove();
+
+                // Reseteamos las listas
+                selectValor.value = "";
+                selectStat.value = "";
+
+                // Si ya se usaron las 6 estadísticas, bloqueamos el botón
+                if (statsUsadas.size === 6) {
+                    botonAsignar.disabled = true;
+                    instrucciones.textContent = "¡Terminaste con Todas tus estadísticas!";
+                }
+            });
+
+            // Agregamos los elementos creados al contenedor
+            asignador.appendChild(instrucciones);
+            asignador.appendChild(selectValor);
+            asignador.appendChild(selectStat);
+            asignador.appendChild(botonAsignar);
+            contenedor.appendChild(asignador);
+        }
+
+        // Agregamos todo el contenido a la seccion del DOM
+        contenedor.appendChild(titulo);
+        contenedor.appendChild(resultados);
+        contenedor.appendChild(botonLanzar);
+        descripcionSection.appendChild(contenedor);
+    }
+});
+// Evento de Click en el boton "Crear Personaje"
+document.addEventListener("click", function(event){
+    if(event.target.closest("#crearPersonaje")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+
+        // Traer todos los datos del local storage
+        const nombrePj = localStorage.getItem("nombrePj");
+        const Genero = localStorage.getItem("Genero");
+        const Raza = localStorage.getItem("Raza");
+        const Clase = localStorage.getItem("Clase");
+        const tipoArmor = localStorage.getItem("tipoArmor");
+        const Armadura = localStorage.getItem("tipoArmor");
+        const tipoArma = localStorage.getItem("tipoArma");
+        const Arma = localStorage.getItem("Arma");
+        const Habilidad = localStorage.getItem("Habilidad");
+        const tipoAccesorio = localStorage.getItem("tipoAccesorio");
+        const Accesorio = localStorage.getItem("Accesorio");
+        const destreza = localStorage.getItem("destreza");
+        const carisma = localStorage.getItem("carisma");
+        const inteligencia = localStorage.getItem("inteligencia");
+        const constitucion = localStorage.getItem("constitucion");
+        const sabiduria = localStorage.getItem("sabiduria");
+        const fuerza = localStorage.getItem("fuerza");
+
+        // Creacion de obgeto de heroe
+        const nuevoPJ =
+        {
+            "nombrePj": nombrePj,
+            "Genero": Genero,
+            "Raza": Raza,
+            "Clase": Clase,
+            "tipoArmor": tipoArmor,
+            "Armadura": Armadura,
+            "tipoArma": tipoArma,
+            "Arma": Arma,
+            "Habilidad": Habilidad,
+            "tipoAccesorio": tipoAccesorio,
+            "Accesorio": Accesorio,
+            "Estadisticas": {
+                "destreza": destreza,
+                "carisma": carisma,
+                "inteligencia": inteligencia,
+                "constitucion": constitucion,
+                "sabiduria": sabiduria,
+                "fuerza": fuerza,
+            }
+        }
+
+        // Guardamos el nuevo pj en el local storage
+        localStorage.setItem("nuevoPJ", JSON.stringify(nuevoPJ));
+
+        // Cargamos contenido en Descripcion dependiendo si se tiene o no usuario activo
+        const section = document.querySelector(".section__descripcion");
+        section.innerHTML = ""; // Limpiar contenido previo
+    
+        const usuarioActivo = localStorage.getItem("usuario");
+    
+        const stats = nuevoPJ.Estadisticas;
+        const imagenRaza = `../assets/img/${nuevoPJ.Raza.toLowerCase()}.webp`;
+    
+        const tarjetaHTML = `
+          <div class="div__personaje">
+            <h2>${nuevoPJ.nombrePj}</h2>
+            <img src="${imagenRaza}" alt="${nuevoPJ.Raza}" class="raza-img" />
+            <p><strong>Género:</strong> ${nuevoPJ.Genero}</p>
+            <p><strong>Raza:</strong> ${nuevoPJ.Raza}</p>
+            <p><strong>Clase:</strong> ${nuevoPJ.Clase}</p>
+            <p><strong>Armadura:</strong> ${nuevoPJ.tipoArmor} - ${nuevoPJ.Armadura}</p>
+            <p><strong>Arma:</strong> ${nuevoPJ.tipoArma} - ${nuevoPJ.Arma}</p>
+            <p><strong>Accesorio:</strong> ${nuevoPJ.tipoAccesorio} - ${nuevoPJ.Accesorio}</p>
+            <p><strong>Habilidad especial:</strong> ${nuevoPJ.Habilidad}</p>
+    
+            <div class="estadisticas">
+              <h3>Estadísticas</h3>
+              <ul>
+                <li>Fuerza: ${stats.fuerza}</li>
+                <li>Destreza: ${stats.destreza}</li>
+                <li>Constitución: ${stats.constitucion}</li>
+                <li>Inteligencia: ${stats.inteligencia}</li>
+                <li>Sabiduría: ${stats.sabiduria}</li>
+                <li>Carisma: ${stats.carisma}</li>
+              </ul>
+            </div>
+    
+            <div class="card__footer">
+              ${
+                usuarioActivo
+                  ? `<button id="guardarPersonaje">Guardar Personaje</button>`
+                  : `<button id="iniciarSesionGuardar">Inicia sesión para guardar</button>`
+              }
+            </div>
+          </div>
+        `;
+        section.innerHTML = tarjetaHTML;
+    }
+});
+// Evento de Click en el boton "Guardar Personaje"
+document.addEventListener("click", async function (event) {
+    if(event.target.closest("#guardarPersonaje")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+
+        const personajeGuardado = JSON.parse(localStorage.getItem("nuevoPJ"));
+        const usuarioActivo = JSON.parse(localStorage.getItem("usuario")); // este tiene toda la info del usuario
+        console.log(usuarioActivo);
+        
+
+        if (!personajeGuardado || !usuarioActivo) {
+        alert("No se encontró personaje o usuario activo.");
+        return;
+        }
+
+        try {
+        // Traer todos los usuarios
+        const usuarios = await find();
+
+        // Buscar el usuario activo en la API por su nombre de usuario
+        const usuarioDB = usuarios.find(u => u.usuario === usuarioActivo);
+        if (!usuarioDB) {
+            alert("Usuario no encontrado en la base de datos.");
+            return;
+        }
+
+        // Agregar el personaje al array existente
+        const personajesActualizados = [...usuarioDB.personajes, personajeGuardado];
+
+        // Actualizar en la API
+        const usuarioActualizado = await update(usuarioDB.id, {
+            ...usuarioDB,
+            personajes: personajesActualizados
+        });
+
+        // Actualizar en localStorage
+        localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+
+        alert("¡Personaje guardado con éxito!");
+        // Limpiar todo el localStorage excepto "usuario"
+        const usuarioData = localStorage.getItem("usuario"); // Guardamos temporalmente
+        localStorage.clear(); // Borramos todo
+        localStorage.setItem("usuario", usuarioData); // Restauramos solo el usuario
+            //Modificacion de estilos
+            main.style.flexDirection = ``;
+            main.style.alignItems = ``;
+            main.style.marginTop = ``;
+            main.style.marginBottom = ``;
+            main.style.marginLeft = ``;
+            main.style.gap = ``;
+
+            main.innerHTML = home; // Se agrega el nuevo contenido al main
+        } catch (error) {
+        console.error("Error al guardar el personaje:", error);
+        alert("Error al guardar el personaje.");
+        }
+  }
+});
+// Evento de Click en el boton "iniciar sesion para Guardar Personaje"
+document.addEventListener("click", async function (event) {
+    if(event.target.closest("#iniciarSesionGuardar")){
+        event.preventDefault(); // Quitar todas las acciones por defecto del evento click
+        //Modificacion de estilos
+        main.style.gap = ""
+
+        main.style.flexDirection = 'row';
+        main.style.alignItems = `center`;
+        main.style.marginTop = `17%`;
+        main.style.marginBottom = `50%`;
+        main.style.marginLeft = `35%`;
+
+        main.innerHTML = ``; // Eliminar todo el contenido de el Main
+        main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
+  }
+});
 // **************************** Eventos de Perfil ***************************//
 // Evento Click opcion "Perfil" Menu "Header"
 irPerfil.addEventListener("click", function(event){
