@@ -13,11 +13,10 @@ import {home, inicioSesion, formularioCreacionUsuario, formularioCreacionPersona
 const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 
 // Zona de Selectores
-
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
-const irmasInfo = document.getElementById("#ir__masInfo")
+const irmasInfo = document.getElementById("ir__masInfo")
 const ulOpciones = document.querySelector(".ul__opciones");
 const selectRaza = document.getElementById("#cp-raza");
 
@@ -148,6 +147,9 @@ document.addEventListener("change", async function(event){
         // Insertamos descripción en el contenedor derecho
         const razaDescripcion = document.querySelector(".section__descripcion");
         razaDescripcion.innerHTML = `
+        <div class="div__imagenCrearPersonaje">
+                <img src="../assets/img/${razaSelec}.webp">
+            </div>
             <h2>Descripcion Raza : ${razaSelec}</h2>
             <div class="div__descripccionRaza">
                 <h2>Alineamiento</h2>
@@ -162,9 +164,6 @@ document.addEventListener("change", async function(event){
                     <ul>
                         Rasgos:
                         ${datosRaza.traits.map(trait => `<li>${trait.name}</li>`).join("")}
-                    </ul>
-                    <li>Subrazas: ${datosRaza.subraces[0]?.name || "Ninguna"}</li>
-                    <ul>
                         Competencias Iniciales:
                         ${datosRaza.starting_proficiencies.map(p => `<li>${p.name}</li>`).join("")}
                     </ul>
@@ -176,9 +175,7 @@ document.addEventListener("change", async function(event){
                     ` : ""}
                 </ol>
             </div>
-            <div class="div__imagenCrearPersonaje">
-                <img src="../assets/img/${razaSelec}.webp">
-            </div>
+            
         `;
     }
 });
@@ -1022,7 +1019,7 @@ document.addEventListener("click", async function(event){
         main.style.alignItems = `center`;
         main.style.marginTop = `2%`;
         main.style.marginBottom = `0`;
-        main.style.marginLeft = `32%`;
+        main.style.marginLeft = `30%`;
     
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = formularioCreacionUsuario; // Se agrega el nuevo contenido al main
@@ -1167,18 +1164,21 @@ document.addEventListener("click", function(event){
         //Modificacion de estilos
         main.style.gap = ""
 
+        //Modificacion de estilos
+        main.style.gap = ""
+
         main.style.flexDirection = 'row';
         main.style.alignItems = `center`;
-        main.style.marginTop = `17%`;
-        main.style.marginBottom = `50%`;
-        main.style.marginLeft = `35%`;
+        main.style.marginTop = `2%`;
+        main.style.marginBottom = `0`;
+        main.style.marginLeft = `30%`;
 
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
     }
 });
 // Evento click opcion "Mostrar Personajes"
-document.addEventListener("click", async function (event) {
+irmasInfo.addEventListener("click", async function (event) {
     event.preventDefault();
 
     // Buscar al usuario completo desde la API
@@ -1221,11 +1221,8 @@ document.addEventListener("click", async function (event) {
                     </div>
                 `;
                 main.appendChild(tarjeta);
-                //Modificacion de estilos
-                main.style.gap = ""
-                main.style.display = 'flex';
-                main.style.alignItems = `center`;
-                main.style.justifyContent = `center`;
+                // Modificacion de estylos main
+                main.style.marginLeft = "";
             });    
         }else {
             // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;

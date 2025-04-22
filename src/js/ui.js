@@ -93,7 +93,6 @@ export const formularioCreacionPersonaje = `
       <!-- Datos a eleccion -->
       <div class="div__raza">
         <h3>Eleccion de Raza</h3>
-        <label for="raza">Raza:</label>
         <select id="cp-raza">
           <option value="">Cargando razas...</option>
         </select>
@@ -101,7 +100,6 @@ export const formularioCreacionPersonaje = `
   
       <div class="div__clase">
         <h3>Eleccion de Clase</h3>
-        <label for="clase">Clase:</label>
         <select id="cp-clase">
           <option value="">Cargando clases...</option>
         </select>
@@ -109,12 +107,10 @@ export const formularioCreacionPersonaje = `
   
       <div class="div__armadura">
         <h3>Eleccion Tipo Armadura</h3>
-        <label for="tipo_Armadura">Armadura:</label>
         <select id="cp-tipoArmadura">
           <option value="">Cargando tipo de armaduras...</option>
         </select>
         <h3>Eleccion de Armadura</h3>
-        <label for="armadura">Armadura:</label>
         <select id="cp-armadura">
           <option value="">Cargando armaduras...</option>
         </select>
@@ -122,11 +118,9 @@ export const formularioCreacionPersonaje = `
   
       <div class="div__armas">
         <h3>Eleccion de Arma</h3>
-        <label for="arma">Tipos de Armas:</label>
         <select id="cp-tipoArma">
           <option value="">Cargando tipo de armas...</option>
         </select>
-        <label for="arma">Armas:</label>
         <select id="cp-arma">
           <option value="">Cargando armas...</option>
         </select>
@@ -136,14 +130,16 @@ export const formularioCreacionPersonaje = `
       <div class="div__contenedorDerecho">
           <!-- Estadisticas -->
           <div class="div__estadisticas">
-            <h3>Estadísticas</h3>
-            <button id="lanzarDados">Lanzar Dados!</button>
-            <label>Fuerza: <input type="number" id="fuerza" min="1" max="20"></label>
-            <label>Destreza: <input type="number" id="destreza" min="1" max="20"></label>
-            <label>Constitución: <input type="number" id="constitucion" min="1" max="20"></label>
-            <label>Inteligencia: <input type="number" id="inteligencia" min="1" max="20"></label>
-            <label>Sabiduría: <input type="number" id="sabiduria" min="1" max="20"></label>
-            <label>Carisma: <input type="number" id="carisma" min="1" max="20"></label>
+            <div class="div__contEstats">
+              <h3>Estadísticas</h3>
+              <button id="lanzarDados">Lanzar Dados!</button>
+            </div>
+            <label>Fuerza <input type="number" id="fuerza" min="1" max="20"></label>
+            <label>Destreza <input type="number" id="destreza" min="1" max="20"></label>
+            <label>Constitución <input type="number" id="constitucion" min="1" max="20"></label>
+            <label>Inteligencia <input type="number" id="inteligencia" min="1" max="20"></label>
+            <label>Sabiduría <input type="number" id="sabiduria" min="1" max="20"></label>
+            <label>Carisma <input type="number" id="carisma" min="1" max="20"></label>
           </div>
   
       <!-- Datos habilidades -->

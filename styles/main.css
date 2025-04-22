@@ -15,7 +15,7 @@ body {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     overflow-x: hidden; /* habilitar scroll horizontal unicamente*/
-    min-height: 100vh;
+    /* min-height: 100vh; */
 
     /* Ajusten de imagen de fondo */
     background-image: url(../assets/img/Fondo.png); /* Imagen de fondo */
@@ -102,8 +102,10 @@ body {
 /*  */
 .main{
     width: 100%;
-    max-height: 100vh;
     display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
 }
 /********* Estilos CSS para pagina inicial "Home" *****************/
 /*  */
@@ -382,12 +384,10 @@ body {
 /****************** Creacion de Personaje *************************/
 /*  */
 .section__contenedorcrearPersonaje{
-    /* background: yellow; */
-    
     display: flex;
-    padding: 2rem;
+    padding: 0.5rem;
     gap: 1.5rem;
-    height: 88.23vh;
+    height: auto;
 }
 /*  */
 .section__contenedorcrearPersonaje h2{
@@ -403,21 +403,20 @@ body {
 }   
 /*  */
 .div__estadisticas{
+    display: flex;
     align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 /*  */
 #titulocrearPersonaje{
     color: var(--color-1);
     font-family: "MedievalSharp-Regular";
-    padding: 1rem;
-    font-size: 2rem;
+    padding: 0.5rem;
+    font-size: 1.5rem;
     background: var(--color-5);
     box-shadow: 0 0 10px var(--color-1);
     border-radius: 12px;
-}
-/*  */
-.div__datosBasicos{
-    gap: 0.4rem;
 }
 /*  */
 #cp-nombre{
@@ -429,13 +428,13 @@ body {
 
     background-color: var(--color-5);
     box-shadow: 0 0 10px var(--color-1);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 12px;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
 
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 /*  */
 .div__contenedorDatospj select{
@@ -443,17 +442,17 @@ body {
     font-size: 1rem;
 }
 /*  */
-.div__contenedorDerecho input{
-    font-family: "Poppins-Medium";
-    font-size: 1rem;
-}
-/*  */
 .div__contenedorIzquierdo{
-    /* background: violet; */
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     height: 50%;
+}
+/*  */
+.div__raza, .div__clase, .div__armadura, .div__armas{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 /*  */
 .div__habilidades{
@@ -465,22 +464,43 @@ body {
 }
 /*  */
 .div__accesorios{
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
+    gap: 0.5rem;
 }
 /*  */
 .div__contenedorDerecho{
-    /* background: brown; */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    /* height: 50%; */
 }
 /*  */
-.div__accesorios {
-    gap: 10rem;
+.div__contenedorDerecho input{
+    font-family: "Poppins-Medium";
+    font-size: 1rem;
+}
+/*  */
+.div__contEstats{
+    display: flex;
+    gap: 1.5rem;
+}
+/*  */
+.div__estadisticas label{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    padding-inline: 1rem;
+}
+/*  */
+#lanzarDados {
+    background: var(--color-8);
+    color: var(--color-1);
+    font-family: "MedievalSharp-Regular";
+    font-size: 1rem;
+    padding: 0.4rem;
+    border-radius: 12px;
 }
 /*  */
 #crearPersonaje {
@@ -493,14 +513,13 @@ body {
 }
 /*  */
 .section__crearPersonaje{
-    /* background: red; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: 60%;
-    gap: 1.5rem;
-    padding: 1rem;
+    gap: 1rem;
+    padding-inline: 1rem;
 }
 .section__crearPersonaje label{
     /* background: red; */
@@ -513,30 +532,29 @@ body {
 .div__datosBasicos{
     display: flex;
     flex-direction: column;
-}
-/*  */
-.div__estadisticas{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 0.4rem;
 }
 /*  */
 .section__descripcion{
 
     background-color: var(--color-5);
     box-shadow: 0 0 10px var(--color-1);
-    padding: 3rem;
     border-radius: 12px;
-    width: 48%;
-    height: 100%;
+    max-width: 600px;
+    width: 100%;
 
-    /* background: blue; */
+    /* Trabajo de Flex */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     gap: 1.5rem;
     padding: 2rem;
+}
+/*  */
+.div__imagenCrearPersonaje img{
+    width: 200px;
+    height: auto;
 }
 /*  */
 .section__descripcion h2{
@@ -555,6 +573,12 @@ body {
 .section__descripcion img{
     height: 88%;
     object-fit: contain;
+}
+/*  */
+.div__botonCrear{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 /*************************** Lanzamiento de dados *******************************/
 /*  */
@@ -641,12 +665,22 @@ margin: 0;
 .card__footer button:hover {
     background-color: #3276b1;
 }
+/*************************** Mostrar Persoanjes *******************************/
+/*  */
+.perfil__container{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    overflow-x: hidden;
+    flex-wrap: wrap;    
+}
 /*************************** Footer *******************************/
 /*  */
 .footer{
     width: 100%;
     background: var(--color-4);
-    position: relative;
+    position: fixed;
+    left: 0;
     bottom: 0;
     font-size: 0.9rem;
     /* Trabajo de Flex */
@@ -666,6 +700,3 @@ margin: 0;
     font-family: "Poppins-Medium";
     font-size: 1rem;
 }
-
-
-
