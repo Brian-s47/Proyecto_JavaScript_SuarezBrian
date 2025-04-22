@@ -14,7 +14,7 @@ export const finddnd5eapi = async(url)=>{
 export const urlRazas = function(){
   return new URL("/api/races", "https://www.dnd5eapi.co");
 }
-// Modulo URL razas:
+// Modulo URL raza:
 export const urlRaza = function(raza){
   return new URL(`/api/races/${raza}`, "https://www.dnd5eapi.co");
 }

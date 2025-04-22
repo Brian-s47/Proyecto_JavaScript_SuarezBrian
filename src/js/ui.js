@@ -212,7 +212,3 @@ export const formularioCreacionPersonaje = `
   </section>
 </section>
 `;
-// HTML Tarjeta de Personaje
-export const targetaPersonaje = `
-  
-`;

@@ -17,6 +17,7 @@ const campos = ['nombre', 'correo', 'usuario', 'contraseña'];
 const main = document.querySelector("main");
 const irPerfil = document.getElementById("ir__Perfil");
 const irHome = document.getElementById("ir__home");
+const irmasInfo = document.getElementById("#ir__masInfo")
 const ulOpciones = document.querySelector(".ul__opciones");
 const selectRaza = document.getElementById("#cp-raza");
 
@@ -87,7 +88,6 @@ document.addEventListener("click", async function(event){
         main.innerHTML = formularioCreacionPersonaje; // Se agrega el nuevo contenido al main
     }
 });
-
 // **************************** Eventos de Creacion de pj ***************************//
 // Evento para guardar el nombre del personaje en localStorage
 document.addEventListener("input", function(event){
@@ -1176,4 +1176,59 @@ document.addEventListener("click", function(event){
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
     }
+});
+// Evento click opcion "Mostrar Personajes"
+document.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    // Buscar al usuario completo desde la API
+    const usuarios = await find();
+    console.log(usuarios, typeof(usuarios));
+
+    // Limpiamos y preparamos el <main>
+    main.innerHTML = "";
+    main.className = "perfil__container"; // Añadimos clase para css
+
+    // REcorrido de todos los usuarios
+    usuarios.forEach(usuario =>{
+        console.log(JSON.stringify(usuario.usuario)); 
+        if(usuario.personajes.length > 0) {
+            console.log(usuario.personajes, usuario.personajes.length);  
+            usuario.personajes.forEach(personaje => {
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add("card__personaje");
+                tarjeta.innerHTML = `
+                    <h2>${personaje.nombrePj}</h2>
+                    <img src="../assets/img/${personaje.Raza.toLowerCase()}.webp" alt="${personaje.Raza}" class="raza-img"/>
+                    <p><strong>Género:</strong> ${personaje.Genero}</p>
+                    <p><strong>Raza:</strong> ${personaje.Raza}</p>
+                    <p><strong>Clase:</strong> ${personaje.Clase}</p>
+                    <p><strong>Armadura:</strong> ${personaje.tipoArmor} - ${personaje.Armadura}</p>
+                    <p><strong>Arma:</strong> ${personaje.tipoArma} - ${personaje.Arma}</p>
+                    <p><strong>Accesorio:</strong> ${personaje.tipoAccesorio} - ${personaje.Accesorio}</p>
+                    <p><strong>Habilidad:</strong> ${personaje.Habilidad}</p>
+
+                    <div class="estadisticas">
+                        <h3>Estadísticas</h3>
+                        <ul>
+                        <li>Fuerza: ${personaje.Estadisticas.fuerza}</li>
+                        <li>Destreza: ${personaje.Estadisticas.destreza}</li>
+                        <li>Constitución: ${personaje.Estadisticas.constitucion}</li>
+                        <li>Inteligencia: ${personaje.Estadisticas.inteligencia}</li>
+                        <li>Sabiduría: ${personaje.Estadisticas.sabiduria}</li>
+                        <li>Carisma: ${personaje.Estadisticas.carisma}</li>
+                        </ul>
+                    </div>
+                `;
+                main.appendChild(tarjeta);
+                //Modificacion de estilos
+                main.style.gap = ""
+                main.style.display = 'flex';
+                main.style.alignItems = `center`;
+                main.style.justifyContent = `center`;
+            });    
+        }else {
+            // main.innerHTML = `<p class="mensaje__vacio">No tienes personajes guardados aún.</p>`;
+        }       
+    });
 });
