@@ -1000,9 +1000,9 @@ irPerfil.addEventListener("click", async function(event){
 
         main.style.flexDirection = 'row';
         main.style.alignItems = `center`;
-        main.style.marginTop = `17%`;
-        main.style.marginBottom = `50%`;
-        main.style.marginLeft = `35%`;
+        main.style.marginTop = `2%`;
+        main.style.marginBottom = `0`;
+        main.style.marginLeft = `30%`;
 
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = inicioSesion; // Se agrega el nuevo contenido al main
@@ -1020,8 +1020,9 @@ document.addEventListener("click", async function(event){
     
         main.style.flexDirection = 'row';
         main.style.alignItems = `center`;
-        main.style.marginTop = `10%`;
-        main.style.marginBottom = `100%`;
+        main.style.marginTop = `2%`;
+        main.style.marginBottom = `0`;
+        main.style.marginLeft = `32%`;
     
         main.innerHTML = ``; // Eliminar todo el contenido de el Main
         main.innerHTML = formularioCreacionUsuario; // Se agrega el nuevo contenido al main
