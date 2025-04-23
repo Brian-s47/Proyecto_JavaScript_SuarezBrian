@@ -1,54 +1,54 @@
 @import url(variables.css);
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-    scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  scroll-behavior: smooth;
 }
 /***************************** Body *******************************/
 /*  */
 body {
-    /* Trabajo de Grid */
-    display: grid; 
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    overflow-x: hidden; /* habilitar scroll horizontal unicamente*/
+  /* Trabajo de Grid */
+  display: grid; 
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  overflow-x: hidden; /* habilitar scroll horizontal unicamente*/
 
-    /* Ajusten de imagen de fondo */
-    background-image: url(../assets/img/Fondo.png); /* Imagen de fondo */
-    background-size: cover; /* Para que la imagen cubra toda la pantalla */
-    background-position: center; /* Para centrar la imagen de fondo */
-    background-attachment: fixed; /* Deja la imagen de fondo mientras el contenido se mueve */
-    background-repeat: no-repeat; /* Para que la imagen no se repita */
+  /* Ajusten de imagen de fondo */
+  background-image: url(../assets/img/Fondo.png); /* Imagen de fondo */
+  background-size: cover; /* Para que la imagen cubra toda la pantalla */
+  background-position: center; /* Para centrar la imagen de fondo */
+  background-attachment: fixed; /* Deja la imagen de fondo mientras el contenido se mueve */
+  background-repeat: no-repeat; /* Para que la imagen no se repita */
 }
 /**************************** Header ******************************/
 /*  */
 .header{
-    width: 100%;
-    padding: 1rem;
-    position: sticky;
-    top: 0;
+  width: 100%;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
 
-    background: var(--color-4);
-    backdrop-filter: blur(7px);
-    border-radius: 0 0 30px 30px;
-    padding: 0.5rem;
+  background: var(--color-4);
+  backdrop-filter: blur(7px);
+  border-radius: 0 0 30px 30px;
+  padding: 0.5rem;
 }
 /*  */
 .div__contenedor{
-    /* Trabajo de Flex */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  /* Trabajo de Flex */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 /*  */
 #ir__home{
-    cursor: pointer;
-    max-width: 150px;
-    width: 100%;
-    height: auto;
+  cursor: pointer;
+  max-width: 150px;
+  width: 100%;
+  height: auto;
 }
 /*  */
 .av__menu{
@@ -56,1026 +56,291 @@ body {
 }
 /*  */
 .ul__opciones{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7rem;
 }
 /*  */
 .ul__opciones li{
-    list-style: none;
+  list-style: none;
 }
 /*  */
 .ul__opciones li a{
-    color: var(--color-9);
-    font-family: "DragonHunter";
-    letter-spacing: 5px;
-    font-size: 1rem;
-    text-decoration: none;
+  color: var(--color-9);
+  font-family: "DragonHunter";
+  letter-spacing: 5px;
+  font-size: 1rem;
+  text-decoration: none;
 
-    /* Ajustes para animaciones */
-    position: relative;
-    transition: all 0.3s ease;
+  /* Ajustes para animaciones */
+  position: relative;
+  transition: all 0.3s ease;
 }
 /* Efectos visuales */
 .ul__opciones li a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--color-5);
-    transition: width 0.5s ease;
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-5);
+  transition: width 0.5s ease;
 }
 /*  */
 .ul__opciones li a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 /*  */
 .ul__opciones li a:hover {
-    color: var(--color-5);
-    text-shadow: 0 0 8px var(--color-1);
-    transform: scale(1.05);
+  color: var(--color-5);
+  text-shadow: 0 0 8px var(--color-1);
+  transform: scale(1.05);
 }
+/********* Estilos CSS (mediaQueris) para  "Header" *****************/
+/* Smartphones  */
+@media (max-width: 599px) {
+  /* Tarjetas Pj */
+  /*  */
+  
+  }
 /**************************** Main ********************************/
 /*  */
 .main{
-    width: 100%;
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
 }
 /********* Estilos CSS para pagina inicial "Home" *****************/
 /*  */
 .section__contenidoHome{
-    /* Trabajo de Grid */
-    display: grid;
-    grid-template-columns: repeat(8, 1fr); 
-    grid-auto-rows: auto;
-    gap: 1.5rem;
-    padding: 3rem 2rem;
-    align-items: start;
+  /* Trabajo de Grid */
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); 
+  grid-auto-rows: auto;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  align-items: start;
 
-    margin: 0 auto;
+  margin: 0 auto;
 }
 /*  */
 .section__contenidoHome h2{
-    font-family: "MedievalSharp-Regular";
-    font-size: 1.4rem;
-    color: var(--color-1);
-    letter-spacing: 1px;
+  font-family: "MedievalSharp-Regular";
+  font-size: 1.4rem;
+  color: var(--color-1);
+  letter-spacing: 1px;
 }
 /*  */
 .section__contenidoHome p{
-    font-family: "CormorantGaramond-Regular";
-    font-size: 1.7rem;
-    line-height: 1.6;
+  font-family: "CormorantGaramond-Regular";
+  font-size: 1.7rem;
+  line-height: 1.6;
 
-    color: var(--color-1);
-    background: var(--color-7);
-    border-radius: 12px;
+  color: var(--color-1);
+  background: var(--color-7);
+  border-radius: 12px;
 
-    padding: 2rem;
-    overflow-y: auto;
-    max-height: 15rem; 
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: 15rem; 
 }
 /*  */
 .section__contenidoHome a{
-    font-family: "MedievalSharp-Regular";
-    font-size: 1.8rem;
+  font-family: "MedievalSharp-Regular";
+  font-size: 1.8rem;
 
-    color: var(--color-1);
-    background: var(--color-8);
-    text-decoration: none;
-    border-radius: 12px;
+  color: var(--color-1);
+  background: var(--color-8);
+  text-decoration: none;
+  border-radius: 12px;
 
-    padding: 1.5rem;
+  padding: 1.5rem;
 }
 /*  */
 .div__info-plataforma{
-    grid-column: 1 / 5;
-    grid-row: 1 / 2;
-    height: auto;
-    gap: 1.5rem;
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+  height: auto;
+  gap: 1.5rem;
 }
 /*  */
 .div__info-juego{
-    grid-column: 5 / 9;
-    grid-row: 1 / 2;
-    height: auto;
-}
-/*  */
-.div__personaje-izquierda{
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
-    height: auto;
+  grid-column: 5 / 9;
+  grid-row: 1 / 2;
+  height: auto;
 }
 /*  */
 .div__info-aplicacion{
-    grid-column: 3 / 7;
-    grid-row: 2 / 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5rem;
-
-    height: auto;
+  grid-column: 3 / 7;
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  height: auto;
+}
+/*  */
+.div__personaje-izquierda{
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  height: auto;
 }
 /*  */
 .div__personaje-derecha{
-    grid-column: 7 / 9;
-    grid-row: 2 / 4;
-    height: auto;
+  grid-column: 7 / 9;
+  grid-row: 2 / 4;
+  height: auto;
 }
 /*  */
 .div__personaje-izquierda img{
-    max-width: 210px;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
+  max-width: 210px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 /*  */
 .div__personaje-derecha img{
-    max-width: 240px;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 /*  */
 .div__boton-creacion {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    padding: 2rem 0;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  padding: 2rem 0;
 }
 /* Efectos visuales */
 /*  */
 .section__contenidoHome p:hover {
-    background-color: var(--color-5); 
-    transition: background-color 0.3s ease;
-    cursor: default;
+  background-color: var(--color-5); 
+  transition: background-color 0.3s ease;
+  cursor: default;
 }
 /*  */
 .div__boton-creacion a:hover {
-    background-color: var(--color-5); 
-    transform: scale(1.05);
-    box-shadow: 0 0 10px var(--color-1);
-    cursor: pointer;
+  background-color: var(--color-5); 
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--color-1);
+  cursor: pointer;
 }
 /*  */
 .div__personaje-izquierda img:hover, .div__personaje-derecha img:hover{
-    transform: scale(1.05);
-    cursor: pointer;
-}
-/*************************** Inicio de sesion *****************************/
-/*  */
-.section__iniciarSesion {
-  background-color: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  padding: 5rem;
-  border-radius: 12px;
-  width: 35rem;
-}
-/*  */
-.section__iniciarSesion h2 {
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px;
-  background: var(--color-2);
-  border-radius: 12px;
-  padding: 1rem;
-}
-/*  */
-.section__iniciarSesion input {
-  font-family: "Poppins-Medium";
-  width: 100%;
-  padding: 10px;
-  margin: 1rem 0;
-  border: none;
-  border-radius: 5px;
-}
-/*  */
-.section__iniciarSesion button {
-  font-family: "Poppins-Medium";
-  font-size: 1.2rem;
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-2);
-  border: none;
-  color: var(--color-1);
-  border-radius: 5px;
+  transform: scale(1.05);
   cursor: pointer;
 }
-/*  */
-.div__resgistrar {
-  font-family: "Poppins-Medium";
-  text-align: center;
-  margin-top: 15px;
-}
-/*  */
-.div__resgistrar a {
-  color: var(--color-1);
-  text-decoration: none;
-}
-/* Efectos visuales */
-/*  */
-.section__iniciarSesion button:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-  border:solid 1px var(--color-9);
-}
-/*  */
-.div__resgistrar a:hover {
-  text-decoration: underline;
-}
-/*  */
-.section__iniciarSesion a:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-}
-
-/*************************** Creacion Perfil *****************************/
-/*  */
-.Section__creacionUSuario {
-  background-color: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  padding: 3rem;
-  border-radius: 12px;
-  width: 35rem;
-}
-/*  */
-.Section__creacionUSuario h2 {
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 20px;
-  background: var(--color-2);
-  border-radius: 12px;
-  padding: 1rem;
-}
-/*  */
-.Section__creacionUSuario input {
-  font-family: "Poppins-Medium";
-  width: 100%;
-  padding: 10px;
-  margin: 1rem 0;
-  border: none;
-  border-radius: 5px;
-}
-/*  */
-.Section__creacionUSuario button {
-  font-family: "Poppins-Medium";
-  font-size: 1.2rem;
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-2);
-  border: none;
-  color: var(--color-1);
-  border-radius: 5px;
-  cursor: pointer;
-}
-/*  */
-.div__resgistrar {
-  font-family: "Poppins-Medium";
-  text-align: center;
-  margin-top: 15px;
-}
-/*  */
-.div__resgistrar a {
-  color: var(--color-1);
-  text-decoration: none;
-}
-/* Efectos visuales */
-/*  */
-.Section__creacionUSuario button:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-  border:solid 1px var(--color-9);
-}
-.div__resgistrar a:hover {
-  text-decoration: underline;
-}
-/*  */
-.Section__creacionUSuario a:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-}
-/****************** Creacion de Personaje *************************/
-/*  */
-.section__contenedorcrearPersonaje{
+/********* Estilos CSS (mediaQueris) para pagina inicial "Home" *****************/
+/* Smartphones  */
+@media (max-width: 599px) {
+.div__contenedor{
   display: flex;
-  padding: 0.5rem;
-  gap: 1.5rem;
-  height: auto;
-}
-/*  */
-.section__contenedorcrearPersonaje h2{
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-}
-/*  */
-.section__contenedorcrearPersonaje h3{
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-}   
-/*  */
-.div__estadisticas{
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-/*  */
-#titulocrearPersonaje{
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  background: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  border-radius: 12px;
-}
-/*  */
-#cp-nombre{
-  font-family: "Poppins-Medium";
-  font-size: 1rem;
-}
-/*  */
-.div__contenedorDatospj{
-
-  background-color: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  padding: 1rem;
-  border-radius: 12px;
-  width: auto;
-  height: auto;
-
-  display: flex;
+  justify-content: flex-start;
   gap: 1rem;
 }
 /*  */
-.div__contenedorDatospj select{
-  font-family: "Poppins-Medium";
-  font-size: 1rem;
+.ul__opciones{
+  gap: 1rem;
 }
 /*  */
-.div__contenedorIzquierdo{
+.ul__opciones li a{
+  font-size: 0.7rem;
+}
+/*  */
+.section__contenidoHome {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
-  height: 50%;
-}
-/*  */
-.div__raza, .div__clase, .div__armadura, .div__armas{
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-/*  */
-.div__habilidades{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  gap: 1rem;
-}
-/*  */
-.div__accesorios{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  gap: 0.5rem;
-}
-/*  */
-.div__contenedorDerecho{
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-/*  */
-.div__contenedorDerecho input{
-  font-family: "Poppins-Medium";
-  font-size: 1rem;
-  text-align: center;
-}
-/*  */
-.div__contEstats{
-  display: flex;
-  gap: 1.5rem;
-}
-/*  */
-.div__estadisticas label{
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 2rem;
-  padding-inline: 1rem;
-}
-/*  */
-#lanzarDados {
-  background: var(--color-8);
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1rem;
-  padding: 0.4rem;
-  border-radius: 12px;
-}
-/*  */
-#crearPersonaje {
-  background: var(--color-8);
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-  padding: 1rem;
-  border-radius: 12px;
-}
-/*  */
-.section__crearPersonaje{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 60%;
-  gap: 1rem;
-  padding-inline: 1rem;
-}
-.section__crearPersonaje label{
-  /* background: red; */
-  color: var(--color-1);
-  font-family: "CormorantGaramond-Regular";
-  font-size: 1.5rem;
-  text-align: center;
-}
-/*  */
-.div__datosBasicos{
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-/*  */
-.section__descripcion{
-
-  background-color: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  border-radius: 12px;
-  max-width: 600px;
-  width: 100%;
-
-  /* Trabajo de Flex */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  gap: 1.5rem;
-  padding: 2rem;
-}
-/*  */
-.div__imagenCrearPersonaje img{
-  width: 460px;
-  height: auto;
-}
-/*  */
-.section__descripcion h2{
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-  text-align: center;
-}
-/*  */
-.section__descripcion ul{
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-}
-/*  */
-.section__descripcion p, li{
-  font-family: "CormorantGaramond-Regular";
-  font-size: 1.4rem;
-  color: var(--color-1);
-}
-/*  */
-.div__botonCrear{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/*************************** Creacion Perfil *****************************/
-/*  */
-.Section__creacionUSuario {
-  background-color: var(--color-5);
-  box-shadow: 0 0 10px var(--color-1);
-  padding: 3rem;
-  border-radius: 12px;
-  width: 35rem;
-}
-/*  */
-.Section__creacionUSuario h2 {
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 20px;
-  background: var(--color-2);
-  border-radius: 12px;
   padding: 1rem;
 }
 /*  */
-.Section__creacionUSuario input {
-  font-family: "Poppins-Medium";
+.div__info-plataforma,
+.div__info-juego,
+.div__info-aplicacion {
   width: 100%;
-  padding: 10px;
-  margin: 1rem 0;
-  border: none;
-  border-radius: 5px;
-}
-/*  */
-.Section__creacionUSuario button {
-  font-family: "Poppins-Medium";
-  font-size: 1.2rem;
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-2);
-  border: none;
-  color: var(--color-1);
-  border-radius: 5px;
-  cursor: pointer;
-}
-/*  */
-.div__resgistrar {
-  font-family: "Poppins-Medium";
-  text-align: center;
-  margin-top: 15px;
-}
-/*  */
-.div__resgistrar a {
-  color: var(--color-1);
-  text-decoration: none;
-}
-/* Efectos visuales */
-/*  */
-.Section__creacionUSuario button:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-  border:solid 1px var(--color-9);
-}
-.div__resgistrar a:hover {
-  text-decoration: underline;
-}
-/*  */
-.Section__creacionUSuario a:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-}
-
-/*************************** Descripcion Raza *******************************/
-/*  */
-.div__imagenPersonaje img{
-  width: 160px;
-  height: auto;
-}
-/*  */
-.div__descripccionRaza{
-  display: flex;
-  flex-direction: column;
-}
-/*  */
-.div__descripccionRaza ul{
-  display: flex;
-  flex-direction: column;
-}
-/*************************** Lanzamiento de dados *******************************/
-/*  */
-.div_lanzamientoDados {
-  background-color: var(--color-9);
-  color: var(--color-3);
-  border: 2px solid var(--color-3);
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 600px;
-  margin: 2rem auto;
-  box-shadow: 0 4px 12px var(--color-1);
-}
-/*  */
-.div_lanzamientoDados h4 {
-  font-family: "MedievalSharp-Regular";
-  color: var(--color-1);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-/*  */
-.resultados-dados ul {
-  font-family: "CormorantGaramond-Regular";
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
-  max-height: 235px;
-  overflow-y: auto;
-  border: 1px solid var(--color-3);
-  border-radius: 0.5rem;
-  background-color: var(--color-5);
-}
-/*  */
-.resultados-dados li {
-  font-family:"CormorantGaramond-Regular";
-  padding: 0.2rem 2rem;
-  border-bottom: 1px solid var(--color-3);
-  font-size: 1.8rem;
-}
-/*  */
-.resultados-dados li:last-child {
-  border-bottom: none;
-}
-/*  */
-.div_lanzamientoDados button {
-  background: var(--color-8);
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1.4rem;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 1rem auto;
-  display: block;
-}
-/*  */
-.div_lanzamientoDados button:disabled {
-  background-color: var(--color-1);
-  color: var(--color-3);
-  cursor: not-allowed;
-}
-/*  */
-.asignador-estadisticas {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: center;
-}
-/*  */
-.asignador-estadisticas p {
-  font-family: "CormorantGaramond-Regular";
-  margin: 0;
-  font-size: 1.5rem;
-  color: var(--color-1);
-}
-/*  */
-.asignador-estadisticas select {
-  font-family: "CormorantGaramond-Regular";
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-3);
-  background-color: var(--color-10);
-  color: var(--color-1);
-  width: 80%;
-  max-width: 300px;
-  text-align: center;
-}
-/*  */
-.asignador-estadisticas button {
-  margin-top: 1rem;
-}
-/*************************** Tarjeta Personaje *******************************/
-/*  */
-.div__personaje, .card__personaje {
-  max-width: 400px;
-  height: auto;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-sizing: border-box;
   background-color: var(--color-8);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-/*  */
-.div__personaje, .card__personaje h2 {
-  font-family:"MedievalSharp-Regular";
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
-  color: var(--color-1);
-}
-/*  */
-.div__personaje, .card__personaje{
-  height: auto;
-  margin: 1rem 0;
-  border-radius: 6px;
-  object-fit: cover;
-  border: 2px solid var(--color-1);
-}
-/*  */
-.raza-img {
-  max-width: 200px;
-  height: auto;
-}
-/*  */
-.div__personaje, .card__personaje p {
-  font-family: "CormorantGaramond-Regular";
-  margin: 0.3rem 0;
-  font-size: 1rem;
-  color: var(--color-1);
-}
-/*  */
-.div__personaje, .card__personaje strong {
-  color: var(--color-1);
-}
-/*  */
-.estadisticas {
-  margin-top: 1.2rem;
-  background-color: var(--color-9);
-  padding: 0.8rem;
-  border-radius: 8px;
-}
-/*  */
-.estadisticas h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-  color: var(--color-1);
-}
-/*  */
-.estadisticas ul {
-list-style: none;
-padding: 0;
-margin: 0;
-}
-/*  */
-.estadisticas li {
-  padding: 0.2rem 0;
-  font-size: 0.95rem;
-  color: var(--color-1);
-}
-/*  */
-.card__footer {
-  margin-top: 1.5rem;
-}
-/*  */
-.card__footer button {
-  background: var(--color-8);
-  color: var(--color-1);
-  font-family: "MedievalSharp-Regular";
-  font-size: 1rem;
-  padding: 0.4rem;
-  border-radius: 12px;
-}
-/*  */
-.card__footer button:hover {
-  color: var(--color-9);
-  text-shadow: 0 0 8px var(--color-9);
-  transform: scale(1.05);
-  border:solid 1px var(--color-9);
-}
-/*************************** Mostrar Personajes *******************************/
-/*  */
-.perfil__container{
-  display: flex;
-  gap: 2rem;
+  border-radius: 10px;
   padding: 1rem;
-  overflow-x: hidden;
-  flex-wrap: wrap;    
+  position: relative;
+}
+/*  */
+.div__personaje-izquierda,
+.div__personaje-derecha {
+  display: none;
+}
+/*  */
+.div__info-aplicacion .div__boton-creacion {
+  margin-top: 1rem;
+  text-align: center;
+}
+/*  */
+.div__info-aplicacion{
+  gap: 1rem;
+}
+/*  */
+.section__contenidoHome h2,
+.section__contenidoHome p {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  text-align: center;
+}
+/*  */
+.section__contenidoHome a {
+  font-size: 1.1rem;
+  text-align: center;
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--color-8);
+  color: var(--color-1);
+  border-radius: 10px;
+  text-decoration: none;
+}
 }
 /*************************** Footer *******************************/
 /*  */
 .footer{
-    width: 100%;
-    background: var(--color-4);
-    backdrop-filter: blur(7px);
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    font-size: 0.9rem;
+  width: 100%;
+  background: var(--color-4);
+  backdrop-filter: blur(7px);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 0.9rem;
 
-    /* Trabajo de Flex */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Trabajo de Flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    padding: 0.3rem;
-    height: auto;
-    text-align: center;
+  padding: 0.3rem;
+  height: auto;
+  text-align: center;
 }
 /*  */
 .footer p, a{
-    color: var(--color-3);
-    font-family: "Poppins-Medium";
-    font-size: 1rem;
+  color: var(--color-3);
+  font-family: "Poppins-Medium";
+  font-size: 1rem;
 }
-
-
-/*************************** Media Queris Home *******************************/
-/* Home */
-@media (max-width: 600px) {
-  .div__contenedor{
-    display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-  }
-  .ul__opciones{
-    gap: 1rem;
-  }
-  .ul__opciones li a{
-    font-size: 0.7rem;
-  }
-  .section__contenidoHome {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 1rem;
-  }
-
-  .div__info-plataforma,
-  .div__info-juego,
-  .div__info-aplicacion {
-    width: 100%;
-    box-sizing: border-box;
-    background-color: var(--color-8);
-    border-radius: 10px;
-    padding: 1rem;
-    /* z-index: -1; */
-    position: relative;
-  }
-
-  .div__personaje-izquierda,
-  .div__personaje-derecha {
-    display: none;
-  }
-
-  .div__info-aplicacion .div__boton-creacion {
-    margin-top: 1rem;
-    text-align: center;
-  }
-  .div__info-aplicacion{
-    gap: 1rem;
-  }
-
-  .section__contenidoHome h2,
-  .section__contenidoHome p {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.5;
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
-  .section__contenidoHome a {
-    font-size: 1.1rem;
-    text-align: center;
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--color-8);
-    color: var(--color-1);
-    border-radius: 10px;
-    text-decoration: none;
-  }
-  /* Iniciar sesion */
-  .section__iniciarSesion, .Section__creacionUSuario {
-    width: 90%;
-    padding: 2rem 1rem;
-    margin: 0 auto;
-  }
-
-  .section__iniciarSesion, .Section__creacionUSuario h2 {
-    font-size: 1.6rem;
-    padding: 0.8rem;
-  }
-
-  .section__iniciarSesion, .Section__creacionUSuario input,
-  .section__iniciarSesion, .Section__creacionUSuario button {
-    font-size: 1rem;
-    padding: 0.8rem;
-  }
-
-  .div__resgistrar {
-    font-size: 0.95rem;
-  }
-  /* Creacion de personaje */
-  .section__contenedorcrearPersonaje {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .div__contenedorDatospj {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .div__estadisticas{
-    display: flex;
-    width: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
-  .div__estadisticas label{
-    display: flex;
-    gap: 0.5rem;
-  }
-  .div__contenedorIzquierdo,
-  .div__contenedorDerecho {
-    width: 100%;
-    align-items: center;
-  }
-
-  .div__contenedorDerecho label {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .section__crearPersonaje {
-    width: 100%;
-    padding: 0.5rem;
-  }
-
-  .div__imagenCrearPersonaje img {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  #crearPersonaje {
-    width: 100%;
-  }
-
-  .div__contEstats {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  /* Fotter */
-  .footer p, a{
-    font-size: 0.6rem;
-  }
-}
-
-  /* Tablets (601px a 1024px) */
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .ul__opciones {
-      gap: 3rem;
-    }
+/********* Estilos CSS (mediaQueris) para  "Footer" *****************/
+/* Smartphones  */
+@media (max-width: 599px) {
+  /* Footer */
+  /*  */
   
-    .section__contenidoHome {
-      grid-template-columns: repeat(4, 1fr);
-      padding: 2.5rem 2rem;
-    }
-  
-    .div__info-plataforma {
-      grid-column: 1 / 3;
-    }
-  
-    .div__info-juego {
-      grid-column: 3 / 5;
-    }
-  
-    .div__personaje-izquierda {
-      grid-column: 1 / 2;
-    }
-  
-    .div__info-aplicacion {
-      grid-column: 2 / 4;
-    }
-  
-    .div__personaje-derecha {
-      grid-column: 4 / 5;
-    }
-  
-    .section__contenidoHome p {
-      font-size: 1.5rem;
-    }
-  
-    .section__contenidoHome a {
-      font-size: 1.6rem;
-    }
-  
-    .div__personaje-izquierda img,
-    .div__personaje-derecha img {
-      max-width: 200px;
-    }
-    /* footer */
-    .footer {
-      font-size: 0.9rem;
-      padding: 0.5rem;
-      backdrop-filter: blur(7px);
-    }
   }
