@@ -1,0 +1,28 @@
+:root{
+    --color-1: #FFFFFF;
+    --color-2: hsla(0, 0%, 100%, 0.200);
+    --color-3: #d9d9d9a2;
+    --color-4: hsla(0, 0%, 100%, 0.350);
+    --color-5: rgba(134, 21, 21, 0.8);
+    --color-6: hsla(44, 100%, 77%, 0.300);
+    --color-7: hsla(0, 100%, 81%, 0.300);
+    --color-8: #ff00004d;
+    --color-9: #000000;
+    --color-10: hsl(0, 100%, 30%);
+}
+@font-face {
+    font-family: "DragonHunter";
+    src: url(../assets/font/DragonHunter.otf);
+}
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url(../assets/font/Poppins-Medium.ttf);
+}
+@font-face {
+    font-family: "CormorantGaramond-Regular";
+    src: url(../assets/font/CormorantGaramond-Regular.ttf);
+}
+@font-face {
+    font-family: "MedievalSharp-Regular";
+    src: url(../assets/font/MedievalSharp-Regular.ttf);
+}

@@ -1,11 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../assets/icon/favicon.jpg"> <!-- Icono de Pestaña del navegador -->
+  <!-- Carga de archivos CSS -->
+  <link rel="stylesheet" href="../styles/main.css"> <!-- Carga de Archivo de CSS "Home" -->
+  <link rel="stylesheet" href="../styles/gestion-usuarios.css"> <!-- Carga de Archivo de "CSS Gestion usuarios" -->
+  <link rel="stylesheet" href="../styles/creacionPj.css"> <!-- Carga de Archivo de CSS "Creacion Pj" -->
+  <link rel="stylesheet" href="../styles/tarjetasPj.css">  <!-- Carga de Archivo de CSS "Tarjetas Pj" -->
+  <!-- Carga de archivos Js -->
+  <script type="module" defer src="./js/main.js"></script> <!-- Carga de Archivo de Js "Home" -->
+  <script type="module" defer src="./js/creacionPj.js"></script> <!-- Carga de Archivo de Js "Creacion Pj" -->
+
+  <title>GameCampus JP D&D</title>
 </head>
+
 <body>
-    
+  <!-- Header -->
+  <header class="header">
+    <div class="div__contenedor">
+      <img id="ir__home" src="../assets/icon/iconoD&D.png" alt="iconoD&D">
+      <nav class="nav__menu">
+        <ul class="ul__opciones">
+          <li><a id="ir__Perfil" href="#">Perfil</a></li>
+          <li><a id="ir__masInfo" href="#">Mostrar Personajes</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <section class="section__contenidoHome">
+      <!-- Contenedor: ¿Qué es esta plataforma?  -->
+      <div class="div__info-plataforma">
+        <h2>¿Qué es esta plataforma?</h2>
+        <p>
+          Esta herramienta te permite construir personajes únicos seleccionando raza, clase, habilidades, equipo,
+          accesorios ¡y mucho más! Todo adaptado al universo de fantasía.
+        </p>
+      </div>
+      <!-- Contenedor: ¿Qué es D&D (Dungeons and Dragons)? -->
+      <div class="div__info-juego">
+        <h2>¿Qué es D&D (Dungeons and Dragons)?</h2>
+        <p>
+          En Dungeons & Dragons, los jugadores forman un grupo de aventureros que exploran mundos de fantasía mientras
+          se embarcan en misiones épicas y aumentan su experiencia.
+        </p>
+      </div>
+      <!-- Contenedor: Personaje izquierda -->
+      <div class="div__personaje-izquierda">
+        <img src="../assets/img/Personaje-1.png">
+      </div>
+      <!-- Contenedor: Bienvenida a la aplicacion -->
+      <div class="div__info-aplicacion">
+        <div class="div__info-bienvenida">
+          <h2>Bienvenido al Generador de Personajes Épico</h2>
+          <p>
+            Crea, personaliza y guarda héroes legendarios del mundo de fantasía inspirado en Dungeons & Dragons.
+          </p>
+        </div>
+        <div class="div__boton-creacion">
+          <a id="ir__crearPj" href="#">¡Comienza a crear tu héroe!</a>
+        </div>
+      </div>
+      <!-- Contenedor: Personaje derecha -->
+      <div class="div__personaje-derecha">
+        <img src="../assets/img/Personaje-2.png">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 GameCampus - Proyecto JS - <a href="https://dnd.wizards.com/es">Derechos de Juego D&D</a></p>
+    <p>© 2025 Brian Fair Suarez Porras - <a href="https://github.com/Brian-s47">GitHub</a></p>
+  </footer>
+
 </body>
-</html>

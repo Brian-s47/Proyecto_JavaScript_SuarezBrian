@@ -1,6 +1,6 @@
 # 🧙‍♂️ Proyecto JavaScript - Generador de Personajes GameCampus
 
-¡Bienvenido al Generador de Personajes Épico de GameCampus! Este proyecto forma parte de una entrega académica para el campus de programación y tiene como objetivo construir una aplicación web interactiva, visualmente impactante y completamente funcional usando **HTML**, **CSS** y **JavaScript nativo**.
+¡Bienvenido al Generador de Personajes Épico de GameCampus! Este proyecto forma parte de una entrega académica para el campus de programación y tiene como objetivo construir una aplicación web interactiva y completamente funcional usando **HTML**, **CSS** y **JavaScript nativo**.
 
 ---
 
@@ -17,6 +17,7 @@ GameCampus está desarrollando un videojuego de fantasía épica basado en el un
 - JavaScript (Vanilla JS)
 - API pública: [D&D 5e API](https://www.dnd5eapi.co/)
 - JSON Local (MockAPI para guardado de perfiles y personajes creados)
+- Figma "Para plantear diseño inicial" (https://www.figma.com/design/OYxfFLx16UOZMgtBCubkox/Untitled?node-id=0-1&p=f&t=i96RT8uo0oCZLQdH-0)
 
 ---
 
@@ -39,19 +40,35 @@ GameCampus está desarrollando un videojuego de fantasía épica basado en el un
 
 ## 🗂️ Estructura del Proyecto
 ``` 
-├── 📂 assets/            # Código fuente
-│   ├── 📂 font/          # Fuentes
-│   ├── 📂 icon/          # Iconos
-│   ├── 📂 img/           # Imágenes
-├── 📂 src/               # Código fuente 
-│   ├── 📂 js/            # Scripts de JavaScript  
-│   │   ├── main.js        # Archivo principal, punto de entrada
-│   ├── index.htm          # Página principal 
-├── 📂 style/             # Código fuente 
-│   │   ├── main.css       # Estilos principales
-│   │   ├── variables.css  # Variables de colores y temas 
-├── datos.json             # datos de perfiles
-├── README.md              # Instrucciones generales
+├── 📂 assets/                                        # Código fuente
+│   ├── 📂 font/                                      # Fuentes
+│   ├── 📂 icon/                                      # Iconos
+│   ├── 📂 img/                                       # Imágenes
+├── 📂 data/                                          # Archivos Json para documentacion
+│   ├── 📂 dnd5eap/                                   # Archivos Json API D&D
+│   │   ├── dnd5eap-1-races.js                         # Archivos razas Json API D&D
+│   │   ├── dnd5eap-2-classes.js                       # Archivos clases Json API D&D
+│   │   ├── dnd5eap-3-equipment-categories.js          # Archivos equipos Json API D&D
+│   │   ├── dnd5eap-4-ability-scores.js                # Archivos habilidades Json API D&D
+│   │   ├── dnd5eap-5-skills.js                        # Archivos skills Json API D&D
+│   │   ├── dnd5eap-6-spells.js                        # Archivos spells Json API D&D
+│   │   ├── dnd5eap-7-equipment.js                     # Archivos equipos Json API D&D
+│   │   ├── dnd5eap.js                                 # Archivos Json API D&D
+│   ├── mockapi.htm                                    # Archivos razas Json API mokapi 
+├── 📂 src/                                           # Código fuente 
+│   ├── 📂 js/                                        # Scripts de JavaScript 
+│   │   ├── api.js                                     # Modulo de manejo de APIS
+│   │   ├── creacionPj.js                              # Modulo manejo de creacion de Pj
+│   │   ├── main.js                                    # Archivo principal, punto de entrada
+│   │   ├── ui.js                                      # Modulos de HTML para incertar
+│   ├── index.htm                                      # Página principal 
+├── 📂 style/                                          # Código fuente 
+│   │   ├── creacionPj.css                             # Estilos Creacion de Pj
+│   │   ├── gestion-usuarios.css                       # Estilos inicio sesion, creacion perfil
+│   │   ├── main.css                                   # Estilos principales
+│   │   ├── tarjetasPj.css                             # Estilos Tarjetas de Pjs
+│   │   ├── variables.css                              # Variables de colores y temas 
+├── README.md                                          # Instrucciones generales
 ```
 ---
 
