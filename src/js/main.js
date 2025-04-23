@@ -133,6 +133,7 @@ irmasInfo.addEventListener("click", async function (event) {
                 tarjeta.classList.add("card__personaje");
                 tarjeta.innerHTML = `
                     <h2>${personaje.nombrePj}</h2>
+                    <h2>${usuario.usuario}</h2>
                     <img src="../assets/img/${personaje.Raza.toLowerCase()}.webp" alt="${personaje.Raza}" class="raza-img"/>
                     <p><strong>Género:</strong> ${personaje.Genero}</p>
                     <p><strong>Raza:</strong> ${personaje.Raza}</p>
@@ -175,7 +176,7 @@ document.addEventListener("click", async function(event){
     }
 });
 
-// **************************** Eventos de Gestion de usuarios ***************************//
+// ************************ Eventos de Gestion de usuarios *************************//
 // Evento click opcion "Entrar" Formulario "Iniciar Sesion"
 document.addEventListener("click", async function (event) {
     if(event.target.closest("#botonIniciarsesion")){
@@ -298,7 +299,7 @@ document.addEventListener("click", async function (event) {
         const usuario = document.getElementById("usuario").value;
         const contrasena = document.getElementById("contraseña").value;
 
-            // Crear objeto JS con el contenido base de un usuario
+        // Crear objeto JS con el contenido base de un usuario
         const nuevoUsuario = {
             id: "",
             nombre: nombre,
