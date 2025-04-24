@@ -44,6 +44,7 @@ GameCampus está desarrollando un videojuego de fantasía épica basado en el un
 │   ├── 📂 font/                                      # Fuentes
 │   ├── 📂 icon/                                      # Iconos
 │   ├── 📂 img/                                       # Imágenes
+│   ├── 📂 sounds/                                    # Sonido y efectos
 ├── 📂 data/                                          # Archivos Json para documentacion
 │   ├── 📂 dnd5eap/                                   # Archivos Json API D&D
 │   │   ├── dnd5eap-1-races.js                         # Archivos razas Json API D&D
@@ -54,7 +55,7 @@ GameCampus está desarrollando un videojuego de fantasía épica basado en el un
 │   │   ├── dnd5eap-6-spells.js                        # Archivos spells Json API D&D
 │   │   ├── dnd5eap-7-equipment.js                     # Archivos equipos Json API D&D
 │   │   ├── dnd5eap.js                                 # Archivos Json API D&D
-│   ├── mockapi.htm                                    # Archivos razas Json API mokapi 
+│   ├── mockapi.js                                     # Archivos razas Json API mokapi 
 ├── 📂 src/                                           # Código fuente 
 │   ├── 📂 js/                                        # Scripts de JavaScript 
 │   │   ├── api.js                                     # Modulo de manejo de APIS

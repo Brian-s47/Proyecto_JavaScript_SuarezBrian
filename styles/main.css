@@ -242,10 +242,15 @@ body {
 }
 /* Efectos visuales */
 /*  */
+.section__contenidoHome h2:hover {
+  transform: scale(1.05);
+}
+/*  */
 .section__contenidoHome p:hover {
   background-color: var(--color-5); 
-  transition: background-color 0.3s ease;
-  cursor: default;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--color-1);
+  cursor: pointer;
 }
 /*  */
 .div__boton-creacion a:hover {
@@ -287,11 +292,13 @@ body {
 .div__info-plataforma,
 .div__info-juego,
 .div__info-aplicacion {
+  display: flex;
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
   background-color: var(--color-8);
   border-radius: 10px;
+  gap: 1rem;
   padding: 1rem;
   position: relative;
 }

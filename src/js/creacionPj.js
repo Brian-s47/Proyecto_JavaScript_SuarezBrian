@@ -4,6 +4,7 @@ import {home, inicioSesion} from "./ui.js"
 
 // Zona de Selectores
 const main = document.querySelector("main");
+const sonidoLanzamiento = document.getElementById("sonidoLanzamiento");
 
 // Zona de modulos funcionales
 // Funcion para lanzar dado de 6 caras
@@ -566,6 +567,7 @@ document.addEventListener("change", async function(event){
 document.addEventListener("click", function(event){
     if (event.target && event.target.id === "lanzarDados"){
 
+        
         // Seleccionamos la sección donde mostraremos los lanzamientos y limpiamos cualquier contenido anterior
         const descripcionSection = document.querySelector(".section__descripcion");
         descripcionSection.innerHTML = ""; 
@@ -596,6 +598,10 @@ document.addEventListener("click", function(event){
         // Lógica al hacer click en el boton "Lanzar Dados"
         botonLanzar.addEventListener("click", () => {
             if (lanzamientosRestantes > 0) {
+                
+                // Sonido de lanzamiento de dados
+                sonidoLanzamiento.playbackRate = 1.5;
+                sonidoLanzamiento.play();
                 // Lanzamos tres dados de 6 caras
                 const d1 = lanzarDado();
                 const d2 = lanzarDado();

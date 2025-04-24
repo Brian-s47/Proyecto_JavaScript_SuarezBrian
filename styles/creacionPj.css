@@ -195,7 +195,14 @@
     align-items: center;
     justify-content: center;
 }
-
+/* Efectos visuales */
+/*  */
+.card__personaje:hover {
+    background-color: var(--color-5); 
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--color-1);
+    cursor: pointer;
+  }
 /*************************** Descripcion Raza *******************************/
 /*  */
 .div__imagenPersonaje img{
